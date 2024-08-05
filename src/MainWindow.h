@@ -2,11 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTableWidget>
-#include <QLabel>
-#include <QTextBrowser>
-#include <QLineEdit>
-#include <QPushButton>
+#include "LeftPane.h"
+#include "RightPane.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -17,12 +14,8 @@ public:
 
 private:
     void setupUI();
-    QTableWidget *table;
-    QLabel *imageLabel;
-    QTextBrowser *textBrowser;
-    QLineEdit *searchLineEdit;
-    QPushButton *installButton;
-    QPushButton *uninstallButton;
+    LeftPane *leftPane;
+    RightPane *rightPane;
 };
 
 #endif // MAINWINDOW_H

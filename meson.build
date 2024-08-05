@@ -1,4 +1,4 @@
-project('hello_qt', 'cpp',
+project('shalrath', 'cpp',
   default_options: ['cpp_std=c++17'])
 
 qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets'])
@@ -31,7 +31,9 @@ qt_resource = custom_target('qt_resource',
 )
 
 moc_files = [
-  'src/MainWindow.h'
+  'src/MainWindow.h',
+  'src/LeftPane.h',
+  'src/RightPane.h'
 ]
 
 moc_outputs = []
@@ -45,8 +47,8 @@ foreach moc_file : moc_files
   moc_outputs += moc_output
 endforeach
 
-executable('hello_qt',
-  sources: ['src/main.cpp', 'src/MainWindow.cpp', qt_resource] + moc_outputs,
+executable('shalrath',
+  sources: ['src/main.cpp', 'src/MainWindow.cpp', 'src/LeftPane.cpp', 'src/RightPane.cpp', qt_resource] + moc_outputs,
   dependencies: [qt6_dep],
   install: true
 )
