@@ -3,3 +3,4 @@ project('shalrath', 'cpp',
 
 subdir('resources')
 subdir('src')
+subdir('tests')
