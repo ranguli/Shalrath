@@ -1,11 +1,11 @@
+curl_dep = dependency('libcurl', required: true)
+
 network_sources = [
   'NetworkUtils.cpp',
-  'QuaddictedClient.cpp',
-  'XMLParser.cpp'
 ]
 
 network_dep = declare_dependency(
   sources: network_sources,
-  include_directories: include_directories('.'),
-  dependencies: [curl_dep]
+  dependencies: [curl_dep],
+  include_directories: include_directories('.')
 )

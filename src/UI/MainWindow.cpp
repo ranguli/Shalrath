@@ -6,7 +6,11 @@
 #include <QStatusBar>
 #include <QVBoxLayout>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) { setupUI(); }
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+    client = new QuaddictedClient(this);
+    connect(this, &MainWindow::updateDatabaseRequested, client, &QuaddictedClient::downloadMapDatabase);
+    setupUI();
+}
 
 MainWindow::~MainWindow() {}
 
@@ -36,12 +40,17 @@ void MainWindow::setupUI() {
     // Add the splitter to the central widget's layout
     auto *centralLayout = new QVBoxLayout(centralWidget);
     centralLayout->addWidget(splitter);
-
+    
     // Create a menu bar
     QMenuBar *menuBar = this->menuBar();
 
     // Add menus to the menu bar
     QMenu *fileMenu = menuBar->addMenu("File");
+    QAction *updateAction = new QAction("Update Map Database...", this);
+    fileMenu->addAction(updateAction);
+
+    connect(updateAction, &QAction::triggered, this, &MainWindow::updateMapDatabase);
+
     QMenu *editMenu = menuBar->addMenu("Edit");
     QMenu *viewMenu = menuBar->addMenu("View");
     QMenu *helpMenu = menuBar->addMenu("Help");
@@ -49,4 +58,8 @@ void MainWindow::setupUI() {
     // Create a status bar and add it to the main window
     QStatusBar *statusBar = this->statusBar();
     statusBar->showMessage("Ready");
+}
+
+void MainWindow::updateMapDatabase() {
+    emit updateDatabaseRequested();
 }

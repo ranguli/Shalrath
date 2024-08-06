@@ -1,22 +1,26 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
-
 #include "LeftPane.h"
 #include "RightPane.h"
+#include "QuaddictedClient.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
-   public:
+public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-   private:
+signals:
+    void updateDatabaseRequested();
+
+private slots:
+    void updateMapDatabase();
+
+private:
     void setupUI();
     LeftPane *leftPane;
     RightPane *rightPane;
+    QuaddictedClient *client;
 };
-
-#endif  // MAINWINDOW_H

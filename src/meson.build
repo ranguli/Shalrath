@@ -7,6 +7,7 @@ pugixml_dep = subproject('pugixml').get_variable('pugixml_dep')
 subdir('UI')
 subdir('Network')
 subdir('Database')
+subdir('Model')
 
 executable('shalrath',
   sources: [

@@ -1,4 +1,4 @@
-qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets']).as_system()
+qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets'], required: true).as_system()
 qt6_rcc = find_program('rcc', required: true)
 
 # Custom function to find moc
@@ -23,7 +23,8 @@ endif
 moc_files = [
   'MainWindow.h',
   'LeftPane.h',
-  'RightPane.h'
+  'RightPane.h',
+  'QuaddictedClient.h'
 ]
 
 moc_outputs = []
@@ -48,6 +49,7 @@ ui_sources = [
   'MainWindow.cpp',
   'LeftPane.cpp',
   'RightPane.cpp',
+  'QuaddictedClient.cpp',
   qt_resource
 ] + moc_outputs
 
