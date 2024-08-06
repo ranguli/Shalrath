@@ -1,9 +1,10 @@
 #include "SQLManager.h"
-#include <iostream>
+
 #include <fstream>
+#include <iostream>
 #include <sstream>
 
-SQLManager::SQLManager(const std::string& dbPath) {
+SQLManager::SQLManager(const std::string &dbPath) {
     if (sqlite3_open(dbPath.c_str(), &db) != SQLITE_OK) {
         std::cerr << "Failed to open database: " << sqlite3_errmsg(db) << std::endl;
     }
@@ -15,7 +16,7 @@ SQLManager::~SQLManager() {
     }
 }
 
-bool SQLManager::initialize(const std::string& schemaPath) {
+bool SQLManager::initialize(const std::string &schemaPath) {
     std::ifstream schemaFile(schemaPath);
     if (!schemaFile) {
         std::cerr << "Failed to open schema file: " << schemaPath << std::endl;
@@ -26,7 +27,7 @@ bool SQLManager::initialize(const std::string& schemaPath) {
     schemaBuffer << schemaFile.rdbuf();
     std::string schemaSQL = schemaBuffer.str();
 
-    char* errMsg = nullptr;
+    char *errMsg = nullptr;
     if (sqlite3_exec(db, schemaSQL.c_str(), nullptr, nullptr, &errMsg) != SQLITE_OK) {
         std::cerr << "Failed to execute schema: " << errMsg << std::endl;
         sqlite3_free(errMsg);
@@ -36,8 +37,8 @@ bool SQLManager::initialize(const std::string& schemaPath) {
     return true;
 }
 
-std::vector<std::vector<std::string>> SQLManager::querySQL(const std::string& sql) {
-    sqlite3_stmt* statement;
+std::vector<std::vector<std::string>> SQLManager::querySQL(const std::string &sql) {
+    sqlite3_stmt *statement;
     std::vector<std::vector<std::string>> results;
 
     if (sqlite3_prepare_v2(db, sql.c_str(), -1, &statement, nullptr) != SQLITE_OK) {
@@ -49,7 +50,7 @@ std::vector<std::vector<std::string>> SQLManager::querySQL(const std::string& sq
     while (sqlite3_step(statement) == SQLITE_ROW) {
         std::vector<std::string> row;
         for (int i = 0; i < cols; i++) {
-            const char* text = reinterpret_cast<const char*>(sqlite3_column_text(statement, i));
+            const char *text = reinterpret_cast<const char *>(sqlite3_column_text(statement, i));
             row.push_back(text ? text : "");
         }
         results.push_back(row);

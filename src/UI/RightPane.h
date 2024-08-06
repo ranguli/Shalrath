@@ -1,16 +1,15 @@
-#ifndef RIGHTPANE_H
-#define RIGHTPANE_H
+#pragma once
 
+#include <QComboBox>
 #include <QFrame>
 #include <QLabel>
-#include <QTextBrowser>
 #include <QPushButton>
-#include <QComboBox>
+#include <QTextBrowser>
 
 class RightPane : public QFrame {
     Q_OBJECT
 
-public:
+   public:
     RightPane(QWidget *parent = nullptr);
 
     QLabel *imageLabel;
@@ -20,8 +19,6 @@ public:
     QPushButton *playButton;
     QComboBox *episodeSelectButton;
 
-private:
+   private:
     void setupUI();
 };
-
-#endif // RIGHTPANE_H

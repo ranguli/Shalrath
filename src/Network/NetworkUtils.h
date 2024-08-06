@@ -1,6 +1,6 @@
 #pragma once
 
 class NetworkUtils {
-public:
+   public:
     static bool checkInternetConnection();
 };

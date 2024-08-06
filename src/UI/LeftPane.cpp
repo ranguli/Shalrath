@@ -1,20 +1,19 @@
 #include "LeftPane.h"
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QIcon>
-#include <QHeaderView>
 
-LeftPane::LeftPane(QWidget *parent) : QWidget(parent) {
-    setupUI();
-}
+#include <QHBoxLayout>
+#include <QHeaderView>
+#include <QIcon>
+#include <QLabel>
+#include <QVBoxLayout>
+
+LeftPane::LeftPane(QWidget *parent) : QWidget(parent) { setupUI(); }
 
 void LeftPane::setupUI() {
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     // Add a horizontal layout for the "Search" label and the line edit
-    QHBoxLayout *searchLayout = new QHBoxLayout;
-    QLabel *searchLabel = new QLabel("Search");
+    auto *searchLayout = new QHBoxLayout;
+    auto *searchLabel = new QLabel("Search");
     searchLineEdit = new QLineEdit;
     searchLayout->addWidget(searchLabel);
     searchLayout->addWidget(searchLineEdit);
@@ -23,11 +22,12 @@ void LeftPane::setupUI() {
     layout->addLayout(searchLayout);
 
     // Add a table below the search layout
-    table = new QTableWidget(50, 8); // 50 rows and 8 columns for example
+    table = new QTableWidget(50, 8);  // 50 rows and 8 columns for example
     table->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Set the table headers
-    QStringList headers = {"", "", "Filename", "Title", "Description", "Author", "Date Released", "User Ratings"};
+    QStringList headers = {
+        "", "", "Filename", "Title", "Description", "Author", "Date Released", "User Ratings"};
     table->setHorizontalHeaderLabels(headers);
 
     // Set icons for "Installed" and "Favorited" columns
@@ -38,7 +38,8 @@ void LeftPane::setupUI() {
     // Hide the vertical header (row numbers)
     table->verticalHeader()->setVisible(false);
 
-    // Make columns stretch to fill available space, except for the first two and the last one
+    // Make columns stretch to fill available space, except for the first two and
+    // the last one
     table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Set a minimum section size to prevent header text from being cut off
@@ -49,27 +50,27 @@ void LeftPane::setupUI() {
     table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
 
     // Fix the size of the first two columns to the icon size
-    int iconSize = 24;  // Assuming the icons are 24x24 pixels
-    table->setColumnWidth(0, iconSize); // Width for the "Installed" column
-    table->setColumnWidth(1, iconSize); // Width for the "Favorited" column
+    int iconSize = 24;                   // Assuming the icons are 24x24 pixels
+    table->setColumnWidth(0, iconSize);  // Width for the "Installed" column
+    table->setColumnWidth(1, iconSize);  // Width for the "Favorited" column
 
     // Set minimum width for the other columns
     for (int col = 2; col < table->columnCount() - 1; ++col) {
-        table->horizontalHeader()->resizeSection(col, 150); // Adjust the value 150 as necessary
+        table->horizontalHeader()->resizeSection(col, 150);  // Adjust the value 150 as necessary
     }
 
     // Set fixed width for the "User Ratings" column to fit the content
-    table->setColumnWidth(7, 200); // Adjust this value if necessary
+    table->setColumnWidth(7, 200);  // Adjust this value if necessary
 
     // Populate the table with icons in "Installed" and "Favorited" columns
     for (int row = 0; row < table->rowCount(); ++row) {
         // Add download icon to "Installed" column
-        QTableWidgetItem *installedItem = new QTableWidgetItem;
+        auto *installedItem = new QTableWidgetItem;
         installedItem->setIcon(downloadIcon);
         table->setItem(row, 0, installedItem);
 
         // Add heart icon to "Favorited" column
-        QTableWidgetItem *favoritedItem = new QTableWidgetItem;
+        auto *favoritedItem = new QTableWidgetItem;
         favoritedItem->setIcon(favoriteIcon);
         table->setItem(row, 1, favoritedItem);
 
@@ -81,16 +82,17 @@ void LeftPane::setupUI() {
         table->setItem(row, 6, new QTableWidgetItem("Date Released"));
 
         // Add star icons and review text to "User Ratings" column
-        QWidget *ratingWidget = new QWidget();
-        QHBoxLayout *ratingLayout = new QHBoxLayout(ratingWidget);
+        auto *ratingWidget = new QWidget();
+        auto *ratingLayout = new QHBoxLayout(ratingWidget);
+
         ratingLayout->setContentsMargins(0, 0, 0, 0);
         ratingLayout->setSpacing(2);
         for (int i = 0; i < 5; ++i) {
-            QLabel *starLabel = new QLabel();
+            auto *starLabel = new QLabel();
             starLabel->setPixmap(starIcon.pixmap(16, 16));
             ratingLayout->addWidget(starLabel);
         }
-        QLabel *reviewLabel = new QLabel("(42 reviews)");
+        auto *reviewLabel = new QLabel("(42 reviews)");
         ratingLayout->addWidget(reviewLabel);
         ratingWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         table->setCellWidget(row, 7, ratingWidget);

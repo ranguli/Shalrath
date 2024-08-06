@@ -1,4 +1,4 @@
-qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets'])
+qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets']).as_system()
 qt6_rcc = find_program('rcc', required: true)
 
 # Custom function to find moc

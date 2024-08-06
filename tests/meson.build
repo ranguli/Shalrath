@@ -1,4 +1,4 @@
-gtest_dep = dependency('gtest', required: true)
+gtest_dep = dependency('gtest', required: true).as_system()
 
 test_sources = [
   'DatabaseTests.cpp',

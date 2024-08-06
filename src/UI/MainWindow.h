@@ -2,20 +2,21 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
 #include "LeftPane.h"
 #include "RightPane.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
-public:
+   public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private:
+   private:
     void setupUI();
     LeftPane *leftPane;
     RightPane *rightPane;
 };
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

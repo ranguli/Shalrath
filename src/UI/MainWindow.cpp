@@ -1,17 +1,14 @@
 #include "MainWindow.h"
-#include <QSplitter>
-#include <QVBoxLayout>
+
 #include <QHBoxLayout>
 #include <QMenuBar>
+#include <QSplitter>
 #include <QStatusBar>
+#include <QVBoxLayout>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) {
-    setupUI();
-}
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) { setupUI(); }
 
-MainWindow::~MainWindow() {
-}
+MainWindow::~MainWindow() {}
 
 void MainWindow::setupUI() {
     setWindowTitle("Hello World");
@@ -22,7 +19,7 @@ void MainWindow::setupUI() {
     setCentralWidget(centralWidget);
 
     // Create a splitter to manage the layout
-    QSplitter *splitter = new QSplitter;
+    auto *splitter = new QSplitter;
 
     // Create the left and right panes
     leftPane = new LeftPane(this);
@@ -37,7 +34,7 @@ void MainWindow::setupUI() {
     splitter->setStretchFactor(1, 1);  // Right pane gets 20%
 
     // Add the splitter to the central widget's layout
-    QVBoxLayout *centralLayout = new QVBoxLayout(centralWidget);
+    auto *centralLayout = new QVBoxLayout(centralWidget);
     centralLayout->addWidget(splitter);
 
     // Create a menu bar
