@@ -1,10 +1,10 @@
 curl_dep = dependency('libcurl', required: true)
 
 network_sources = [
-  'NetworkUtils.cpp',
-      'INetworkClient.h',
+    'INetworkClient.h',
     'QuaddictedClient.cpp',
     'QuaddictedClient.h',
+    'NetworkUtils.cpp'
 ]
 
 network_dep = declare_dependency(

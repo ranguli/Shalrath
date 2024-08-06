@@ -1,32 +1,30 @@
-// src/UI/MainWindow.h
 #pragma once
 
 #include <QMainWindow>
-#include <QMenuBar>
-#include <QStatusBar>
-#include <QWidget>
+#include <QObject>
 #include "LeftPane.h"
 #include "RightPane.h"
-#include "INetworkClient.h"
-#include "QuaddictedClient.h"
+#include "../Network/INetworkClient.h"
+#include "AsyncNetworkTaskUI.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 signals:
-    void updateDatabaseRequested();
+    void updateDatabaseRequested(const QString &url);
 
 private slots:
     void updateMapDatabase();
+    void handleResults(const QString &result);
 
 private:
     void setupUI();
-
     LeftPane *leftPane;
     RightPane *rightPane;
     INetworkClient *client;
+    AsyncNetworkTaskUI *worker;
 };

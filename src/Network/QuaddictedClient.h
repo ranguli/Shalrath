@@ -1,4 +1,3 @@
-// src/Network/QuaddictedClient.h
 #pragma once
 
 #include "INetworkClient.h"
@@ -6,13 +5,12 @@
 
 class QuaddictedClient : public INetworkClient {
 public:
-    QuaddictedClient();
-    ~QuaddictedClient();
+    QuaddictedClient() = default;
+    ~QuaddictedClient() override = default;
 
-    void downloadMapDatabase(const std::string& url = default_url) override;
+    std::string downloadMapDatabase(const std::string &url = default_url) override;
 
 private:
     static const std::string default_url;
     static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
-    std::string downloadXMLManifest(const std::string& url);
 };
