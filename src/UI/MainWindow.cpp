@@ -1,3 +1,24 @@
+/**
+ * @file MainWindow.cpp
+ * @brief The primary user interface for the application.
+ * 
+ * The MainWindow class describes the main user interface of the application. 
+ * 
+ * Key components include:
+ * - The central widget that contains a QSplitter for managing the layout.
+ * - LeftPane and RightPane widgets that are added to the splitter.
+ * - The menu bar with various menus (File, Edit, View, Help) and actions.
+ * - The status bar to display messages and statuses.
+ *
+ * These UI responsibilities are handled by the setupUI() method. 
+ * 
+ * This class is also responsible for the connection of Qt signals and slots
+ * to connect the "business logic" to the UI. This includes the initiation
+ * and handling of network tasks through the AsyncNetworkTaskUI class, which
+ * permits background network tasks that are non-blocking and do not freeze
+ * the UI.
+ */
+ 
 #include "MainWindow.h"
 #include <QThread>
 #include <QMenuBar>

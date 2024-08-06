@@ -1,3 +1,26 @@
+/**
+ * @file QuaddictedClient.cpp
+ * @brief Declares the QuaddictedClient class, an implementation of the INetworkClient interface.
+ * 
+ * This header file defines the QuaddictedClient class, which implements the INetworkClient
+ * interface to perform network operations specific to downloading map databases from the
+ * Quaddicted website. The class provides the necessary functionality to download and process
+ * data from a given URL.
+ * 
+ * The QuaddictedClient class includes:
+ * - A method to download the map database from a specified URL.
+ * - A default URL for the Quaddicted map database.
+ * - Callback functions for handling the data received during the download.
+ * 
+ * Usage:
+ * - Instantiate the QuaddictedClient class and use it to download data from the Quaddicted website.
+ * - Pass a QuaddictedClient instance to other classes that require network operations.
+ * 
+ * @see INetworkClient
+ * @see AsyncNetworkTaskUI
+ */
+
+
 #include "QuaddictedClient.h"
 #include <curl/curl.h>
 #include <sstream>
