@@ -1,14 +1,14 @@
 gtest_dep = dependency('gtest', required: true)
-curl_dep = dependency('libcurl', required: true)
 
 test_sources = [
+  'DatabaseTests.cpp',
   'NetworkTests.cpp',
   'main.cpp'
 ]
 
 test_executable = executable('run_tests',
   sources: test_sources,
-  dependencies: [gtest_dep, curl_dep, network_dep],
+  dependencies: [gtest_dep, network_dep, database_dep],
   install: false
 )
 
