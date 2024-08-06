@@ -1,10 +1,9 @@
-
-
 #pragma once
 
 #include <QMainWindow>
 #include "INetworkClient.h"
 #include "AsyncNetworkTaskUI.h"
+#include "StatusBar.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -19,10 +18,12 @@ signals:
 public slots:
     void updateMapDatabase();
     void handleResults(const QString& result);
+    void handleTaskStarted();
 
 private:
     INetworkClient* client;
     AsyncNetworkTaskUI* worker;
     QThread* workerThread;
+    StatusBar* statusBar;
     void setupUI();
 };
