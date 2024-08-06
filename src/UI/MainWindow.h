@@ -1,8 +1,13 @@
+// src/UI/MainWindow.h
 #pragma once
 
 #include <QMainWindow>
+#include <QMenuBar>
+#include <QStatusBar>
+#include <QWidget>
 #include "LeftPane.h"
 #include "RightPane.h"
+#include "INetworkClient.h"
 #include "QuaddictedClient.h"
 
 class MainWindow : public QMainWindow {
@@ -20,7 +25,8 @@ private slots:
 
 private:
     void setupUI();
+
     LeftPane *leftPane;
     RightPane *rightPane;
-    QuaddictedClient *client;
+    INetworkClient *client;
 };

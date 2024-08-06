@@ -1,3 +1,4 @@
+// src/Network/QuaddictedClient.cpp
 #include "QuaddictedClient.h"
 #include "QuaddictedXMLParser.h"
 #include <curl/curl.h>
@@ -5,16 +6,21 @@
 #include <iostream>
 #include <ostream>
 
-// Define the default URL
 const std::string QuaddictedClient::default_url = "https://www.quaddicted.com/reviews/quaddicted_database.xml";
 
-QuaddictedClient::QuaddictedClient(QObject *parent) : QObject(parent) {}
+QuaddictedClient::QuaddictedClient() {}
 
 QuaddictedClient::~QuaddictedClient() {}
 
-void QuaddictedClient::downloadMapDatabase() {
-    std::string manifest = downloadXMLManifest();
-    std::cout << manifest;
+size_t QuaddictedClient::WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
+    std::ostream* stream = static_cast<std::ostream*>(userp);
+    size_t totalSize = size * nmemb;
+    stream->write(static_cast<char*>(contents), static_cast<std::streamsize>(totalSize));
+    return totalSize;
+}
+
+void QuaddictedClient::downloadMapDatabase(const std::string& url) {
+    std::string manifest = downloadXMLManifest(url.empty() ? default_url : url);
     //QuaddictedXMLParser::parseXMLManifest(manifest);
 }
 
@@ -27,9 +33,9 @@ std::string QuaddictedClient::downloadXMLManifest(const std::string& url) {
     curl = curl_easy_init();
     if (curl) {
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, QuaddictedClient::WriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &stream);
-        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L); // 30 second timeout
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L);
 
         res = curl_easy_perform(curl);
         if (res != CURLE_OK) {
@@ -43,11 +49,4 @@ std::string QuaddictedClient::downloadXMLManifest(const std::string& url) {
     curl_global_cleanup();
 
     return stream.str();
-}
-
-size_t QuaddictedClient::WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
-    std::ostream* stream = static_cast<std::ostream*>(userp);
-    size_t totalSize = size * nmemb;
-    stream->write(static_cast<char*>(contents), static_cast<std::streamsize>(totalSize));
-    return totalSize;
 }
