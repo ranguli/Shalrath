@@ -1,12 +1,14 @@
 #include <gtest/gtest.h>
-#include <QFile>
+
 #include <QDir>
-#include "QuaddictedXMLParser.h"
+#include <QFile>
+
 #include "Map.h"
+#include "QuaddictedXMLParser.h"
 
 class QuaddictedXMLParserTest : public ::testing::Test {
-protected:
-    QString loadFixture(const QString &fixtureName) {
+   protected:
+    QString loadFixture(const QString& fixtureName) {
         QString fixturePath = QDir::currentPath() + "/tests/" + fixtureName;
 
         QFile file(fixturePath);
