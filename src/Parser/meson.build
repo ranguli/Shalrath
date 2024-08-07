@@ -4,6 +4,6 @@ parser_sources = [
 
 parser_dep = declare_dependency(
   sources: parser_sources,
-  dependencies: [pugixml_dep, model_dep],
+  dependencies: [model_dep],
   include_directories: include_directories('.')
 )
