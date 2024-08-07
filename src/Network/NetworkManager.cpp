@@ -2,9 +2,7 @@
 
 #include <QNetworkReply>
 #include <QNetworkRequest>
-
-const QString NetworkManager::mapDatabaseUrl =
-    "https://www.quaddicted.com/reviews/quaddicted_database.xml";
+#include <QUrl>
 
 NetworkManager::NetworkManager(QObject* parent)
     : QObject(parent), networkManager(new QNetworkAccessManager(this)) {
@@ -14,14 +12,34 @@ NetworkManager::NetworkManager(QObject* parent)
 
 void NetworkManager::downloadMapDatabase() {
     emit downloadStarted();
-    QUrl url(mapDatabaseUrl);
-    QNetworkRequest request(url);
+    QNetworkRequest request{QUrl(mapDatabaseUrl)};
+    networkManager->get(request);
+}
+
+void NetworkManager::downloadMap(const QString& url) {
+    emit downloadStarted();
+    QNetworkRequest request{QUrl(url)};
+    networkManager->get(request);
+}
+
+void NetworkManager::downloadThumbnail(const QString& url) {
+    emit downloadStarted();
+    QNetworkRequest request{QUrl(url)};
     networkManager->get(request);
 }
 
 void NetworkManager::onDownloadFinished(QNetworkReply* reply) {
     if (reply->error() == QNetworkReply::NoError) {
-        emit downloadFinished("Map database updated");
+        QString result = QString::fromUtf8(reply->readAll());
+        if (reply->url().toString() == mapDatabaseUrl) {
+            emit downloadFinished("Map database updated");
+        } else if (reply->url().toString().endsWith(".zip")) {  // Assuming maps are zip files
+            emit mapDownloadFinished("Map downloaded");
+        } else if (reply->url().toString().endsWith(".jpg") ||
+                   reply->url().toString().endsWith(
+                       ".png")) {  // Assuming thumbnails are jpg or png
+            emit thumbnailDownloadFinished("Thumbnail downloaded");
+        }
     } else {
         emit downloadFinished("Could not update map database");
     }

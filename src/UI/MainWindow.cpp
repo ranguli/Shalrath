@@ -2,12 +2,10 @@
 
 #include <QCloseEvent>
 #include <QCoreApplication>
-#include <QIcon>
 #include <QMenuBar>
 #include <QPixmap>
 #include <QSplitter>
 #include <QStatusBar>
-#include <QStyle>
 #include <QThread>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -20,8 +18,14 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), networkManager(new NetworkManager(this)) {
     connect(this, &MainWindow::updateDatabaseRequested, networkManager,
             &NetworkManager::downloadMapDatabase);
-    connect(networkManager, &NetworkManager::downloadFinished, this, &MainWindow::handleResults);
-    connect(networkManager, &NetworkManager::downloadStarted, this, &MainWindow::handleTaskStarted);
+    connect(networkManager, &NetworkManager::downloadStarted, this,
+            &MainWindow::handleMapDatabaseTaskStarted);
+    connect(networkManager, &NetworkManager::downloadFinished, this,
+            &MainWindow::handleMapDatabaseResults);
+    connect(networkManager, &NetworkManager::mapDownloadFinished, this,
+            &MainWindow::handleMapDownloadResults);
+    connect(networkManager, &NetworkManager::thumbnailDownloadFinished, this,
+            &MainWindow::handleThumbnailDownloadResults);
 
     setupUI();
 }
@@ -70,10 +74,23 @@ void MainWindow::setupUI() {
 
 void MainWindow::updateMapDatabase() { emit updateDatabaseRequested(); }
 
-void MainWindow::handleTaskStarted() { statusBar->displayMessage("Updating map database"); }
+void MainWindow::handleMapDatabaseTaskStarted() {
+    statusBar->displayMessage("Updating map database");
+}
 
-void MainWindow::handleResults(const QString &result) {
+void MainWindow::handleMapDatabaseResults(const QString &result) {
+    Q_UNUSED(result);  // Suppress unused parameter warning
     statusBar->displayMessage("Map database updated");
+}
+
+void MainWindow::handleMapDownloadResults(const QString &result) {
+    Q_UNUSED(result);  // Suppress unused parameter warning
+    statusBar->displayMessage("Map downloaded");
+}
+
+void MainWindow::handleThumbnailDownloadResults(const QString &result) {
+    Q_UNUSED(result);  // Suppress unused parameter warning
+    statusBar->displayMessage("Thumbnail downloaded");
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {

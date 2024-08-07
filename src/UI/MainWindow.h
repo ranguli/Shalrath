@@ -3,8 +3,7 @@
 #include <QMainWindow>
 
 #include "NetworkManager.h"
-
-class StatusBar;
+#include "StatusBar.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -16,10 +15,12 @@ class MainWindow : public QMainWindow {
    signals:
     void updateDatabaseRequested();
 
-   public slots:
+   private slots:
     void updateMapDatabase();
-    void handleResults(const QString& result);
-    void handleTaskStarted();
+    void handleMapDatabaseTaskStarted();
+    void handleMapDatabaseResults(const QString& result);
+    void handleMapDownloadResults(const QString& result);
+    void handleThumbnailDownloadResults(const QString& result);
 
    protected:
     void closeEvent(QCloseEvent* event) override;
@@ -27,7 +28,6 @@ class MainWindow : public QMainWindow {
    private:
     NetworkManager* networkManager;
     StatusBar* statusBar;
-    bool isClosing;
 
     void setupUI();
 };
