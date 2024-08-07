@@ -1,4 +1,5 @@
 #include "QuaddictedXMLParser.h"
+
 #include <iostream>
 
 void QuaddictedXMLParser::parseXMLManifest(const std::string& xmlData) {

@@ -1,16 +1,18 @@
 #include "MainWindow.h"
-#include <QVBoxLayout>
+
 #include <QMenuBar>
+#include <QPixmap>
 #include <QSplitter>
 #include <QStatusBar>
 #include <QThread>
-#include <QPixmap>
-#include "QuaddictedClient.h"
+#include <QVBoxLayout>
+
 #include "LeftPane.h"
+#include "QuaddictedClient.h"
 #include "RightPane.h"
 #include "StatusBar.h"
 
-MainWindow::MainWindow(QWidget* parent)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), client(new QuaddictedClient()), worker(new AsyncNetworkTaskUI(client)) {
     workerThread = new QThread;
     worker->moveToThread(workerThread);
@@ -77,6 +79,4 @@ void MainWindow::handleTaskStarted() {
     statusBar->displayMessageWithIcon("Updating map database", icon);
 }
 
-void MainWindow::handleResults(const QString &result) {
-    statusBar->displayMessage("Map updated");
-}
+void MainWindow::handleResults(const QString &result) { statusBar->displayMessage("Map updated"); }

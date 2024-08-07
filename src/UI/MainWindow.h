@@ -1,26 +1,27 @@
 #pragma once
 
 #include <QMainWindow>
-#include "INetworkClient.h"
+
 #include "AsyncNetworkTaskUI.h"
+#include "INetworkClient.h"
 #include "StatusBar.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
-public:
+   public:
     explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
-signals:
+   signals:
     void updateDatabaseRequested(const QString& url);
 
-public slots:
+   public slots:
     void updateMapDatabase();
     void handleResults(const QString& result);
     void handleTaskStarted();
 
-private:
+   private:
     INetworkClient* client;
     AsyncNetworkTaskUI* worker;
     QThread* workerThread;

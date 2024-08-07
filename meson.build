@@ -26,6 +26,20 @@ add_project_arguments([
   '-fstack-protector'
 ], language: 'cpp')
 
+
+
+cmake = import('cmake')
+
+gtest_cmake = cmake.subproject('googletest', cmake_options : [
+  '-DBUILD_GMOCK=OFF',
+  '-DBUILD_GTEST=ON',
+  '-DBUILD_SHARED_LIBS=OFF',
+  '-DINSTALL_GTEST=OFF'
+])
+
+gtest_dep = gtest_cmake.dependency('gtest')
+gtest_main_dep = gtest_cmake.dependency('gtest_main')
+
 subdir('resources')
 subdir('src')
 subdir('tests')

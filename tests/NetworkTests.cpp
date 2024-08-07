@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "NetworkUtils.h"
 
 TEST(NetworkUtilsTest, CheckInternetConnection) {

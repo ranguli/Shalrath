@@ -4,7 +4,7 @@
 #include <vector>
 
 class Map {
-public:
+   public:
     // Constructors
     Map() = default;
 
@@ -40,7 +40,7 @@ public:
     void setStartMap(const std::string& new_startmap);
     void setThumbnail(const std::vector<unsigned char>& new_thumbnail);
 
-private:
+   private:
     std::string map_id;
     int type = 0;
     int rating = 0;

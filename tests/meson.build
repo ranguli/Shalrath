@@ -1,15 +1,11 @@
-gtest_dep = dependency('gtest', required: true).as_system()
-
-test_sources = [
-  'DatabaseTests.cpp',
-  'NetworkTests.cpp',
-  'main.cpp'
-]
-
-test_executable = executable('run_tests',
-  sources: test_sources,
-  dependencies: [gtest_dep, network_dep, database_dep],
-  install: false
+test_exe = executable('run_tests',
+  [
+     # Add all your test files here
+    'DatabaseTests.cpp',
+    'NetworkTests.cpp', 
+  ], 
+  dependencies: [gtest_dep, gtest_main_dep, network_dep, database_dep],
+  install: true,
 )
 
-test('run_tests', test_executable)
+test('run tests', test_exe)

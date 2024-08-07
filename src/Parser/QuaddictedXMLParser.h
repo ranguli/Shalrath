@@ -2,6 +2,6 @@
 #include <string>
 
 class QuaddictedXMLParser {
-public:
+   public:
     static void parseXMLManifest(const std::string& xmlData);
 };

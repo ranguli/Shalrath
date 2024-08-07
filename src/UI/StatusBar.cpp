@@ -1,7 +1,6 @@
 #include "StatusBar.h"
 
-StatusBar::StatusBar(QWidget* parent)
-    : QStatusBar(parent), iconLabel(new QLabel(this)) {
+StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), iconLabel(new QLabel(this)) {
     addPermanentWidget(iconLabel);
     iconLabel->hide();
 }
