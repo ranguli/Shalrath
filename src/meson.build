@@ -14,6 +14,6 @@ executable('shalrath',
   sources: [
     'main.cpp'
   ],
-  dependencies: [curl_dep, sqlite3_dep, pugixml_dep, ui_dep, network_dep, database_dep, parser_dep],
+  dependencies: [sqlite3_dep, pugixml_dep, ui_dep, network_dep, database_dep, parser_dep],
   install: true
 )

@@ -2,8 +2,7 @@
 
 #include <QMainWindow>
 
-#include "AsyncNetworkTaskUI.h"
-#include "INetworkClient.h"
+#include "NetworkManager.h"
 #include "StatusBar.h"
 
 class MainWindow : public QMainWindow {
@@ -14,17 +13,21 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
 
    signals:
-    void updateDatabaseRequested(const QString& url);
+    void updateDatabaseRequested();
 
-   public slots:
+   private slots:
     void updateMapDatabase();
-    void handleResults(const QString& result);
-    void handleTaskStarted();
+    void handleMapDatabaseTaskStarted();
+    void handleMapDatabaseResults(const QString& result);
+    void handleMapDownloadResults(const QString& result);
+    void handleThumbnailDownloadResults(const QString& result);
+
+   protected:
+    void closeEvent(QCloseEvent* event) override;
 
    private:
-    INetworkClient* client;
-    AsyncNetworkTaskUI* worker;
-    QThread* workerThread;
+    NetworkManager* networkManager;
     StatusBar* statusBar;
+
     void setupUI();
 };
