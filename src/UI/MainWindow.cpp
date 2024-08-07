@@ -2,10 +2,12 @@
 
 #include <QCloseEvent>
 #include <QCoreApplication>
+#include <QIcon>
 #include <QMenuBar>
 #include <QPixmap>
 #include <QSplitter>
 #include <QStatusBar>
+#include <QStyle>
 #include <QThread>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -15,7 +17,7 @@
 #include "StatusBar.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), networkManager(new NetworkManager(this)), isClosing(false) {
+    : QMainWindow(parent), networkManager(new NetworkManager(this)) {
     connect(this, &MainWindow::updateDatabaseRequested, networkManager,
             &NetworkManager::downloadMapDatabase);
     connect(networkManager, &NetworkManager::downloadFinished, this, &MainWindow::handleResults);
@@ -66,26 +68,18 @@ void MainWindow::setupUI() {
             &StatusBar::displayMessage);
 }
 
-void MainWindow::updateMapDatabase() {
-    emit updateDatabaseRequested("https://www.quaddicted.com/reviews/quaddicted_database.xml");
-}
+void MainWindow::updateMapDatabase() { emit updateDatabaseRequested(); }
 
-void MainWindow::handleTaskStarted() {
-    QPixmap icon(":/icons/download.png");  // Replace with the actual path to your icon
-    statusBar->displayMessageWithIcon("Updating map database", icon);
-}
+void MainWindow::handleTaskStarted() { statusBar->displayMessage("Updating map database"); }
 
 void MainWindow::handleResults(const QString &result) {
-    Q_UNUSED(result);  // Suppress unused parameter warning
-    statusBar->displayMessage("Map updated");
+    statusBar->displayMessage("Map database updated");
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    if (!isClosing) {
-        isClosing = true;
-        qDebug() << "Closing application...";
-        event->ignore();
-        // Call QCoreApplication::quit() using QMetaObject to avoid direct call
-        QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);
-    }
+    qDebug() << "Closing application...";
+
+    // Properly handle the event to prevent infinite loop
+    event->accept();
+    QCoreApplication::quit();
 }

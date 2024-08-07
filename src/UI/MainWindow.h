@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
 
    signals:
-    void updateDatabaseRequested(const QString& url);
+    void updateDatabaseRequested();
 
    public slots:
     void updateMapDatabase();

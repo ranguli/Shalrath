@@ -9,12 +9,11 @@ class StatusBar : public QStatusBar {
 
    public:
     explicit StatusBar(QWidget* parent = nullptr);
-    ~StatusBar();
 
    public slots:
     void displayMessage(const QString& message);
-    void displayMessageWithIcon(const QString& message, const QPixmap& icon);
 
    private:
-    QLabel* statusLabel;
+    QLabel* messageLabel;
+    QLabel* iconLabel;
 };

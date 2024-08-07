@@ -9,19 +9,18 @@ class NetworkManager : public QObject {
 
    public:
     explicit NetworkManager(QObject* parent = nullptr);
-    ~NetworkManager();
 
    public slots:
-    void downloadMapDatabase(const QString& url);
+    void downloadMapDatabase();
 
    signals:
     void downloadStarted();
     void downloadFinished(const QString& result);
-    void downloadError(const QString& error);
 
    private slots:
     void onDownloadFinished(QNetworkReply* reply);
 
    private:
     QNetworkAccessManager* networkManager;
+    static const QString mapDatabaseUrl;
 };

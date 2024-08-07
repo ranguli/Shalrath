@@ -2,7 +2,9 @@
 
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QUrl>
+
+const QString NetworkManager::mapDatabaseUrl =
+    "https://www.quaddicted.com/reviews/quaddicted_database.xml";
 
 NetworkManager::NetworkManager(QObject* parent)
     : QObject(parent), networkManager(new QNetworkAccessManager(this)) {
@@ -10,22 +12,18 @@ NetworkManager::NetworkManager(QObject* parent)
             &NetworkManager::onDownloadFinished);
 }
 
-NetworkManager::~NetworkManager() { delete networkManager; }
-
-void NetworkManager::downloadMapDatabase(const QString& url) {
+void NetworkManager::downloadMapDatabase() {
     emit downloadStarted();
-
-    QUrl qurl(url);
-    QNetworkRequest request(qurl);
+    QUrl url(mapDatabaseUrl);
+    QNetworkRequest request(url);
     networkManager->get(request);
 }
 
 void NetworkManager::onDownloadFinished(QNetworkReply* reply) {
     if (reply->error() == QNetworkReply::NoError) {
-        emit downloadFinished("Map updated");
+        emit downloadFinished("Map database updated");
     } else {
-        QString error = reply->errorString();
-        emit downloadError(error);
+        emit downloadFinished("Could not update map database");
     }
     reply->deleteLater();
 }
