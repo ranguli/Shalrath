@@ -1,17 +1,19 @@
 #include "StatusBar.h"
 
-StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), iconLabel(new QLabel(this)) {
-    addPermanentWidget(iconLabel);
-    iconLabel->hide();
+#include <QStyle>
+
+StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
+    statusLabel = new QLabel(this);
+    addPermanentWidget(statusLabel);
 }
 
-void StatusBar::displayMessage(const QString& message, int timeout) {
-    iconLabel->hide();
-    showMessage(message, timeout);
+StatusBar::~StatusBar() {
+    // Proper cleanup if needed
 }
 
-void StatusBar::displayMessageWithIcon(const QString& message, const QPixmap& icon, int timeout) {
-    iconLabel->setPixmap(icon);
-    iconLabel->show();
-    showMessage(message, timeout);
+void StatusBar::displayMessage(const QString& message) { statusLabel->setText(message); }
+
+void StatusBar::displayMessageWithIcon(const QString& message, const QPixmap& icon) {
+    statusLabel->setPixmap(icon);
+    statusLabel->setText(message);
 }

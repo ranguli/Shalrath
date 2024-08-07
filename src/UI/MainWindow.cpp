@@ -1,37 +1,31 @@
 #include "MainWindow.h"
 
+#include <QCloseEvent>
+#include <QCoreApplication>
 #include <QMenuBar>
 #include <QPixmap>
 #include <QSplitter>
 #include <QStatusBar>
 #include <QThread>
 #include <QVBoxLayout>
+#include <QWidget>
 
 #include "LeftPane.h"
-#include "QuaddictedClient.h"
 #include "RightPane.h"
 #include "StatusBar.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), client(new QuaddictedClient()), worker(new AsyncNetworkTaskUI(client)) {
-    workerThread = new QThread;
-    worker->moveToThread(workerThread);
-
-    connect(this, &MainWindow::updateDatabaseRequested, worker, &AsyncNetworkTaskUI::doWork);
-    connect(worker, &AsyncNetworkTaskUI::resultReady, this, &MainWindow::handleResults);
-    connect(worker, &AsyncNetworkTaskUI::taskStarted, this, &MainWindow::handleTaskStarted);
-    connect(worker, &AsyncNetworkTaskUI::finished, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, workerThread, &QThread::quit);
-    connect(workerThread, &QThread::finished, workerThread, &QObject::deleteLater);
-
-    workerThread->start();
+    : QMainWindow(parent), networkManager(new NetworkManager(this)), isClosing(false) {
+    connect(this, &MainWindow::updateDatabaseRequested, networkManager,
+            &NetworkManager::downloadMapDatabase);
+    connect(networkManager, &NetworkManager::downloadFinished, this, &MainWindow::handleResults);
+    connect(networkManager, &NetworkManager::downloadStarted, this, &MainWindow::handleTaskStarted);
 
     setupUI();
 }
 
 MainWindow::~MainWindow() {
-    workerThread->quit();
-    workerThread->wait();
+
 }
 
 void MainWindow::setupUI() {
@@ -60,14 +54,16 @@ void MainWindow::setupUI() {
     QAction *updateAction = fileMenu->addAction("Update Map Database...");
     connect(updateAction, &QAction::triggered, this, &MainWindow::updateMapDatabase);
 
-    QMenu *editMenu = menuBar->addMenu("Edit");
-    QMenu *viewMenu = menuBar->addMenu("View");
-    QMenu *helpMenu = menuBar->addMenu("Help");
+    // Comment out unused variables to avoid warnings
+    // QMenu *editMenu = menuBar->addMenu("Edit");
+    // QMenu *viewMenu = menuBar->addMenu("View");
+    // QMenu *helpMenu = menuBar->addMenu("Help");
 
     statusBar = new StatusBar(this);
     setStatusBar(statusBar);
 
-    connect(worker, &AsyncNetworkTaskUI::resultReady, statusBar, &StatusBar::displayMessage);
+    connect(networkManager, &NetworkManager::downloadFinished, statusBar,
+            &StatusBar::displayMessage);
 }
 
 void MainWindow::updateMapDatabase() {
@@ -79,4 +75,17 @@ void MainWindow::handleTaskStarted() {
     statusBar->displayMessageWithIcon("Updating map database", icon);
 }
 
-void MainWindow::handleResults(const QString &result) { statusBar->displayMessage("Map updated"); }
+void MainWindow::handleResults(const QString &result) {
+    Q_UNUSED(result);  // Suppress unused parameter warning
+    statusBar->displayMessage("Map updated");
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    if (!isClosing) {
+        isClosing = true;
+        qDebug() << "Closing application...";
+        event->ignore();
+        // Call QCoreApplication::quit() using QMetaObject to avoid direct call
+        QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);
+    }
+}

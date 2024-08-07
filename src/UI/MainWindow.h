@@ -2,9 +2,9 @@
 
 #include <QMainWindow>
 
-#include "AsyncNetworkTaskUI.h"
-#include "INetworkClient.h"
-#include "StatusBar.h"
+#include "NetworkManager.h"
+
+class StatusBar;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -21,10 +21,13 @@ class MainWindow : public QMainWindow {
     void handleResults(const QString& result);
     void handleTaskStarted();
 
+   protected:
+    void closeEvent(QCloseEvent* event) override;
+
    private:
-    INetworkClient* client;
-    AsyncNetworkTaskUI* worker;
-    QThread* workerThread;
+    NetworkManager* networkManager;
     StatusBar* statusBar;
+    bool isClosing;
+
     void setupUI();
 };
