@@ -30,9 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupUI();
 }
 
-MainWindow::~MainWindow() {
-
-}
+MainWindow::~MainWindow() {}
 
 void MainWindow::setupUI() {
     setWindowTitle("Hello World");

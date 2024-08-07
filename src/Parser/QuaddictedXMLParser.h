@@ -1,7 +1,11 @@
 #pragma once
-#include <string>
+
+#include <QList>
+#include <QString>
+
+#include "../Model/Map.h"
 
 class QuaddictedXMLParser {
    public:
-    static void parseXMLManifest(const std::string& xmlData);
+    QList<Map> parse(const QString &xmlContent);
 };
