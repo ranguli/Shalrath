@@ -24,7 +24,8 @@ moc_files = [
   'MainWindow.h',
   'LeftPane.h',
   'RightPane.h',
-  'AsyncNetworkTaskUI.h'
+  'AsyncNetworkTaskUI.h',
+  'StatusBar.h'
 ]
 
 moc_outputs = []
@@ -50,6 +51,7 @@ ui_sources = [
   'LeftPane.cpp',
   'RightPane.cpp',
   'AsyncNetworkTaskUI.cpp',
+  'StatusBar.cpp',
   qt_resource
 ] + moc_outputs
 
