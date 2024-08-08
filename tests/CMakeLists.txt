@@ -1,13 +1,20 @@
 # tests/CMakeLists.txt
 
-# Fetch GoogleTest and GoogleMock
+
+# FetchContent module
 include(FetchContent)
+# Fetch GoogleTest from GitHub
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/release-1.11.0.zip
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG     main  # Use the appropriate tag or branch
 )
+
+# Make the googletest content available
 FetchContent_MakeAvailable(googletest)
 
+set_target_properties(gtest PROPERTIES COMPILE_FLAGS "-w")
+set_target_properties(gtest_main PROPERTIES COMPILE_FLAGS "-w")
 enable_testing()
 
 # Add test executable

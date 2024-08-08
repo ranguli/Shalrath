@@ -4,7 +4,7 @@
 ### Dependencies
 
 ```
-sudo apt install qt6-base-dev qt6-base-dev-tools qt6-tools-dev libgl1-mesa-dev libglu1-mesa-dev googletest googletest-tools clang-tidy clang-format cppcheck 
+sudo apt install qt6-base-dev qt6-base-dev-tools qt6-tools-dev libgl1-mesa-dev libglu1-mesa-dev clang-tidy clang-format cppcheck 
 ```
 
 ```meson setup build --backend=ninja --buildtype=debug -Db_sanitize=address -Db_lundef=false -Ddebug=true -Dwarning_level=2 --default-library=static -Dcpp_std=c++17 --reconfigure
