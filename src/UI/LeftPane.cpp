@@ -6,7 +6,9 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-LeftPane::LeftPane(QWidget *parent) : QWidget(parent) { setupUI(); }
+LeftPane::LeftPane(QWidget *parent) : QWidget(parent) {
+    setupUI();
+}
 
 void LeftPane::setupUI() {
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -22,12 +24,11 @@ void LeftPane::setupUI() {
     layout->addLayout(searchLayout);
 
     // Add a table below the search layout
-    table = new QTableWidget(50, 8);  // 50 rows and 8 columns for example
+    table = new QTableWidget(50, 8); // 50 rows and 8 columns for example
     table->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Set the table headers
-    QStringList headers = {
-        "", "", "Filename", "Title", "Description", "Author", "Date Released", "User Ratings"};
+    QStringList headers = {"", "", "Filename", "Title", "Description", "Author", "Date Released", "User Ratings"};
     table->setHorizontalHeaderLabels(headers);
 
     // Set icons for "Installed" and "Favorited" columns
@@ -50,17 +51,17 @@ void LeftPane::setupUI() {
     table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
 
     // Fix the size of the first two columns to the icon size
-    int iconSize = 24;                   // Assuming the icons are 24x24 pixels
-    table->setColumnWidth(0, iconSize);  // Width for the "Installed" column
-    table->setColumnWidth(1, iconSize);  // Width for the "Favorited" column
+    int iconSize = 24;                  // Assuming the icons are 24x24 pixels
+    table->setColumnWidth(0, iconSize); // Width for the "Installed" column
+    table->setColumnWidth(1, iconSize); // Width for the "Favorited" column
 
     // Set minimum width for the other columns
     for (int col = 2; col < table->columnCount() - 1; ++col) {
-        table->horizontalHeader()->resizeSection(col, 150);  // Adjust the value 150 as necessary
+        table->horizontalHeader()->resizeSection(col, 150); // Adjust the value 150 as necessary
     }
 
     // Set fixed width for the "User Ratings" column to fit the content
-    table->setColumnWidth(7, 200);  // Adjust this value if necessary
+    table->setColumnWidth(7, 200); // Adjust this value if necessary
 
     // Populate the table with icons in "Installed" and "Favorited" columns
     for (int row = 0; row < table->rowCount(); ++row) {

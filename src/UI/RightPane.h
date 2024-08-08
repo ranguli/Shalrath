@@ -9,7 +9,7 @@
 class RightPane : public QFrame {
     Q_OBJECT
 
-   public:
+  public:
     RightPane(QWidget *parent = nullptr);
 
     QLabel *imageLabel;
@@ -19,6 +19,6 @@ class RightPane : public QFrame {
     QPushButton *playButton;
     QComboBox *episodeSelectButton;
 
-   private:
+  private:
     void setupUI();
 };
