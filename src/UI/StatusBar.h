@@ -7,13 +7,13 @@
 class StatusBar : public QStatusBar {
     Q_OBJECT
 
-   public:
-    explicit StatusBar(QWidget* parent = nullptr);
+  public:
+    explicit StatusBar(QWidget *parent = nullptr);
 
-   public slots:
-    void displayMessage(const QString& message);
+  public slots:
+    void displayMessage(const QString &message);
 
-   private:
-    QLabel* messageLabel;
-    QLabel* iconLabel;
+  private:
+    QLabel *messageLabel;
+    QLabel *iconLabel;
 };

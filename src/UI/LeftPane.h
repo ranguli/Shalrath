@@ -8,14 +8,14 @@
 class LeftPane : public QWidget {
     Q_OBJECT
 
-   public:
+  public:
     LeftPane(QWidget *parent = nullptr);
 
     QTableWidget *table;
     QLineEdit *searchLineEdit;
 
-   private:
+  private:
     void setupUI();
 };
 
-#endif  // LEFTPANE_H
+#endif // LEFTPANE_H

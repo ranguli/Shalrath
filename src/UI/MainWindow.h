@@ -8,26 +8,26 @@
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
-   public:
-    explicit MainWindow(QWidget* parent = nullptr);
+  public:
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-   signals:
+  signals:
     void updateDatabaseRequested();
 
-   private slots:
+  private slots:
     void updateMapDatabase();
     void handleMapDatabaseTaskStarted();
-    void handleMapDatabaseResults(const QString& result);
-    void handleMapDownloadResults(const QString& result);
-    void handleThumbnailDownloadResults(const QString& result);
+    void handleMapDatabaseResults(const QString &result);
+    void handleMapDownloadResults(const QString &result);
+    void handleThumbnailDownloadResults(const QString &result);
 
-   protected:
-    void closeEvent(QCloseEvent* event) override;
+  protected:
+    void closeEvent(QCloseEvent *event) override;
 
-   private:
-    NetworkManager* networkManager;
-    StatusBar* statusBar;
+  private:
+    NetworkManager *networkManager;
+    StatusBar *statusBar;
 
     void setupUI();
 };

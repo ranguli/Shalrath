@@ -14,23 +14,18 @@
 #include "RightPane.h"
 #include "StatusBar.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), networkManager(new NetworkManager(this)) {
-    connect(this, &MainWindow::updateDatabaseRequested, networkManager,
-            &NetworkManager::downloadMapDatabase);
-    connect(networkManager, &NetworkManager::downloadStarted, this,
-            &MainWindow::handleMapDatabaseTaskStarted);
-    connect(networkManager, &NetworkManager::downloadFinished, this,
-            &MainWindow::handleMapDatabaseResults);
-    connect(networkManager, &NetworkManager::mapDownloadFinished, this,
-            &MainWindow::handleMapDownloadResults);
-    connect(networkManager, &NetworkManager::thumbnailDownloadFinished, this,
-            &MainWindow::handleThumbnailDownloadResults);
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), networkManager(new NetworkManager(this)) {
+    connect(this, &MainWindow::updateDatabaseRequested, networkManager, &NetworkManager::downloadMapDatabase);
+    connect(networkManager, &NetworkManager::downloadStarted, this, &MainWindow::handleMapDatabaseTaskStarted);
+    connect(networkManager, &NetworkManager::downloadFinished, this, &MainWindow::handleMapDatabaseResults);
+    connect(networkManager, &NetworkManager::mapDownloadFinished, this, &MainWindow::handleMapDownloadResults);
+    connect(networkManager, &NetworkManager::thumbnailDownloadFinished, this, &MainWindow::handleThumbnailDownloadResults);
 
     setupUI();
 }
 
-MainWindow::~MainWindow() {}
+MainWindow::~MainWindow() {
+}
 
 void MainWindow::setupUI() {
     setWindowTitle("Hello World");
@@ -66,28 +61,29 @@ void MainWindow::setupUI() {
     statusBar = new StatusBar(this);
     setStatusBar(statusBar);
 
-    connect(networkManager, &NetworkManager::downloadFinished, statusBar,
-            &StatusBar::displayMessage);
+    connect(networkManager, &NetworkManager::downloadFinished, statusBar, &StatusBar::displayMessage);
 }
 
-void MainWindow::updateMapDatabase() { emit updateDatabaseRequested(); }
+void MainWindow::updateMapDatabase() {
+    emit updateDatabaseRequested();
+}
 
 void MainWindow::handleMapDatabaseTaskStarted() {
     statusBar->displayMessage("Updating map database");
 }
 
 void MainWindow::handleMapDatabaseResults(const QString &result) {
-    Q_UNUSED(result);  // Suppress unused parameter warning
+    Q_UNUSED(result); // Suppress unused parameter warning
     statusBar->displayMessage("Map database updated");
 }
 
 void MainWindow::handleMapDownloadResults(const QString &result) {
-    Q_UNUSED(result);  // Suppress unused parameter warning
+    Q_UNUSED(result); // Suppress unused parameter warning
     statusBar->displayMessage("Map downloaded");
 }
 
 void MainWindow::handleThumbnailDownloadResults(const QString &result) {
-    Q_UNUSED(result);  // Suppress unused parameter warning
+    Q_UNUSED(result); // Suppress unused parameter warning
     statusBar->displayMessage("Thumbnail downloaded");
 }
 
