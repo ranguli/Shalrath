@@ -1,52 +1,67 @@
-project('hello_qt', 'cpp',
-  default_options: ['cpp_std=c++17'])
+project('shalrath', 'cpp',
+  default_options: [
+    'cpp_std=c++17',
+    'warning_level=3',
+    'werror=false'
+  ]
+)
 
-qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets'])
+# Additional specific compiler warnings and options
+add_project_arguments([
+  '-Wpedantic',
+  '-Wshadow',
+  '-Wnon-virtual-dtor',
+  '-Wold-style-cast',
+  '-Wcast-align',
+  '-Wunused',
+  '-Woverloaded-virtual',
+  '-Wconversion',
+  '-Wsign-conversion',
+  '-Wmisleading-indentation',
+  '-Wduplicated-cond',
+  '-Wlogical-op',
+  '-Wnull-dereference',
+  '-Wdouble-promotion',
+  '-Wformat=2',
+  '-fstack-protector'
+], language: 'cpp')
 
-qt6_rcc = find_program('rcc', required: true)
+cmake = import('cmake')
 
-# Custom function to find moc
-moc_paths = [
-  '/usr/lib/qt6/libexec/moc',
-  'moc',  # This will find moc in the system PATH
+gtest_cmake = cmake.subproject('googletest', cmake_options : [
+  '-DBUILD_GMOCK=OFF',
+  '-DBUILD_GTEST=ON',
+  '-DBUILD_SHARED_LIBS=OFF',
+  '-DINSTALL_GTEST=OFF'
+])
+
+gtest_dep = gtest_cmake.dependency('gtest')
+gtest_main_dep = gtest_cmake.dependency('gtest_main')
+
+# Custom function to find qmake
+qmake_paths = [
+  '/usr/lib/qt6/bin/qmake',
+  '/usr/bin/qmake6',
+  '/opt/qt6/bin/qmake',
+  '/usr/local/bin/qmake6'
 ]
 
-qt6_moc = []
-foreach moc_path : moc_paths
-  moc_candidate = find_program(moc_path, required: false)
-  if moc_candidate.found()
-    qt6_moc = moc_candidate
+qmake_found = false
+foreach path : qmake_paths
+  if run_command('test', '-x', path).returncode() == 0
+    qmake_found = true
+    env = environment()
+    env.set('QMAKE', path)
     break
   endif
 endforeach
 
-if qt6_moc.found() == false
-  error('Qt 6 moc not found')
+if not qmake_found
+  error('qmake not found in the specified paths')
 endif
 
-qt_resource = custom_target('qt_resource',
-  input: 'resources.qrc',
-  output: 'qrc_resources.cpp',
-  command: [qt6_rcc, '-o', '@OUTPUT@', '@INPUT@']
-)
+qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets', 'Network', 'Sql'], required: true, method: 'pkg-config')
 
-moc_files = [
-  'src/MainWindow.h'
-]
-
-moc_outputs = []
-foreach moc_file : moc_files
-  moc_basename = meson.project_name() + '_' + moc_file.split('/')[-1]
-  moc_output = custom_target('moc_' + moc_basename,
-    input: moc_file,
-    output: 'moc_' + moc_basename + '.cpp',
-    command: [qt6_moc, '@INPUT@', '-o', '@OUTPUT@']
-  )
-  moc_outputs += moc_output
-endforeach
-
-executable('hello_qt',
-  sources: ['src/main.cpp', 'src/MainWindow.cpp', qt_resource] + moc_outputs,
-  dependencies: [qt6_dep],
-  install: true
-)
+subdir('resources')
+subdir('src')
+subdir('tests')

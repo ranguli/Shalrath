@@ -1,0 +1,11 @@
+﻿---
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortLoopsOnASingleLine: 'false'
+ColumnLimit: '135'
+IndentWidth: '4'
+Language: Cpp
+MaxEmptyLinesToKeep: '1'
+ReflowComments: 'true'
+SortIncludes: 'true'
+
+...
