@@ -1,7 +1,10 @@
 #include "Map.h"
 
+using std::string;
+using std::vector;
+
 // Getters
-std::string Map::getMapID() const {
+string Map::getMapID() const {
     return map_id;
 }
 
@@ -9,23 +12,19 @@ int Map::getType() const {
     return type;
 }
 
-int Map::getRating() const {
-    return rating;
-}
-
 double Map::getNormalizedUsersRating() const {
     return normalized_users_rating;
 }
 
-std::string Map::getAuthor() const {
+string Map::getAuthor() const {
     return author;
 }
 
-std::string Map::getTitle() const {
+string Map::getTitle() const {
     return title;
 }
 
-std::string Map::getMD5Sum() const {
+string Map::getMD5Sum() const {
     return md5sum;
 }
 
@@ -33,15 +32,19 @@ int Map::getSize() const {
     return size;
 }
 
-std::string Map::getDate() const {
+string Map::getDate() const {
     return date;
 }
 
-std::string Map::getDescription() const {
+string Map::getDescription() const {
     return description;
 }
 
-std::string Map::getZipBaseDir() const {
+const vector<string> &Map::getTags() const {
+    return tags;
+}
+
+string Map::getZipBaseDir() const {
     return zipbasedir;
 }
 
@@ -64,10 +67,6 @@ void Map::setMapID(const std::string &new_map_id) {
 
 void Map::setType(int new_type) {
     type = new_type;
-}
-
-void Map::setRating(int new_rating) {
-    rating = new_rating;
 }
 
 void Map::setNormalizedUsersRating(double new_normalized_users_rating) {
@@ -96,6 +95,10 @@ void Map::setDate(const std::string &new_date) {
 
 void Map::setDescription(const std::string &new_description) {
     description = new_description;
+}
+
+void Map::addTag(const std::string &tag) {
+    tags.push_back(tag);
 }
 
 void Map::setZipBaseDir(const std::string &new_zipbasedir) {

@@ -14,7 +14,6 @@ class Map {
     // Getters
     string getMapID() const;
     int getType() const;
-    int getRating() const;
     double getNormalizedUsersRating() const;
     string getAuthor() const;
     string getTitle() const;
@@ -22,7 +21,7 @@ class Map {
     int getSize() const;
     string getDate() const;
     string getDescription() const;
-    vector<string> getTags() const;
+    const vector<string> &getTags() const;
     string getZipBaseDir() const;
     string getCommandLine() const;
     string getStartMap() const;
@@ -31,7 +30,6 @@ class Map {
     // Setters
     void setMapID(const string &new_map_id);
     void setType(int new_type);
-    void setRating(int new_rating);
     void setNormalizedUsersRating(double new_normalized_users_rating);
     void setAuthor(const string &new_author);
     void setTitle(const string &new_title);
@@ -39,6 +37,7 @@ class Map {
     void setSize(int new_size);
     void setDate(const string &new_date);
     void setDescription(const string &new_description);
+    void addTag(const std::string &tag);
     void setZipBaseDir(const string &new_zipbasedir);
     void setCommandLine(const string &new_commandline);
     void setStartMap(const string &new_startmap);
@@ -47,7 +46,6 @@ class Map {
   private:
     string map_id;
     int type = 0;
-    int rating = 0;
     double normalized_users_rating = 0.0;
     string author;
     string title;

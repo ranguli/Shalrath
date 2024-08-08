@@ -1,6 +1,6 @@
 # tests/CMakeLists.txt
 
-# Fetch GoogleTest
+# Fetch GoogleTest and GoogleMock
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -17,9 +17,12 @@ add_executable(run_tests
   ParserTests.cpp
 )
 
+# Link against GoogleTest and GoogleMock
 target_link_libraries(run_tests
   gtest
   gtest_main
+  gmock
+  gmock_main
   parser_lib
   network_lib
   database_lib
