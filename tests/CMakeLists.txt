@@ -13,15 +13,15 @@ FetchContent_Declare(
 # Make the googletest content available
 FetchContent_MakeAvailable(googletest)
 
-# Set target properties for gtest to suppress all warnings
-set_target_properties(gtest PROPERTIES 
-    COMPILE_FLAGS "$<$<CXX_COMPILER_ID:MSVC>:/w>$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-w>"
-)
-set_target_properties(gtest_main PROPERTIES 
-    COMPILE_FLAGS "$<$<CXX_COMPILER_ID:MSVC>:/w>$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-w>"
-)
+# Set compiler-specific flags
+if (MSVC)
+  set_target_properties(gtest PROPERTIES COMPILE_FLAGS "/w")
+  set_target_properties(gtest_main PROPERTIES COMPILE_FLAGS "/w")
+else()
+  set_target_properties(gtest PROPERTIES COMPILE_FLAGS "-w")
+  set_target_properties(gtest_main PROPERTIES COMPILE_FLAGS "-w")
+endif()
 
-# Enable testing
 enable_testing()
 
 # Add test executable
