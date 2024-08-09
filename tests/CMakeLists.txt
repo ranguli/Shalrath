@@ -13,10 +13,11 @@ FetchContent_Declare(
 # Make the googletest content available
 FetchContent_MakeAvailable(googletest)
 
-# Set compiler-specific flags
+# Ignore compiler warnings about the googletest library
+
 if (MSVC)
-  set_target_properties(gtest PROPERTIES COMPILE_FLAGS "/w")
-  set_target_properties(gtest_main PROPERTIES COMPILE_FLAGS "/w")
+    target_compile_options(gtest PRIVATE /w /EHsc /wd4530)
+    target_compile_options(gtest_main PRIVATE /w /EHsc /wd4530)
 else()
   set_target_properties(gtest PROPERTIES COMPILE_FLAGS "-w")
   set_target_properties(gtest_main PROPERTIES COMPILE_FLAGS "-w")
