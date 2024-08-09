@@ -81,5 +81,10 @@ jobs:
       
     - name: Run Tests
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: tests/run_tests
+      run: |
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          .\tests\run_tests.exe
+        else
+          ./tests/run_tests
+        fi
       
