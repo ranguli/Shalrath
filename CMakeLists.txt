@@ -7,26 +7,34 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Enable compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Compiler warnings and options
-add_compile_options(
-    -Wall
-    -Wextra
-    -Wpedantic
-    -Werror
-    -Wshadow
-    -Wnon-virtual-dtor
-    -Wold-style-cast
-    -Wcast-align
-    -Wunused
-    -Woverloaded-virtual
-    -Wconversion
-    -Wsign-conversion
-    -Wmisleading-indentation
-    -Wnull-dereference
-    -Wdouble-promotion
-    -Wformat=2
-    -fstack-protector
-)
+# Set compiler-specific flags
+if (MSVC)
+    # MSVC specific flags
+    add_compile_options(/W4 /WX)
+else()
+    # GCC/Clang specific flags
+    add_compile_options(
+        -Wall
+        -Wextra
+        -Wpedantic
+        -Werror
+        -Wshadow
+        -Wnon-virtual-dtor
+        -Wold-style-cast
+        -Wcast-align
+        -Wunused
+        -Woverloaded-virtual
+        -Wconversion
+        -Wsign-conversion
+        -Wmisleading-indentation
+        -Wduplicated-cond
+        -Wlogical-op
+        -Wnull-dereference
+        -Wdouble-promotion
+        -Wformat=2
+        -fstack-protector
+    )
+endif()
 
 # Find Qt6 packages
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network)
