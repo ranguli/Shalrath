@@ -46,26 +46,10 @@ target_link_libraries(run_tests
   model_lib
 )
 
-# Copy the test fixture (and DLLs if on Windows) to the build directory
+# Copy the DLLs if on Windows to the build directory
 if (MSVC)
     set(QT_WINDEPLOYQT_EXECUTABLE "C:/Qt/6.7.2/msvc2019_64/bin/windeployqt.exe")
-
-    add_custom_command(TARGET run_tests POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-          ${CMAKE_SOURCE_DIR}/tests/fixtures/quaddicted_database.xml
-          ${CMAKE_BINARY_DIR}/tests/quaddicted_database.xml
-        COMMAND ${QT_WINDEPLOYQT_EXECUTABLE} $<TARGET_FILE:run_tests>
-        COMMENT "Copying test fixture and running windeployqt to deploy Qt dependencies..."
-    )
-else()
-    add_custom_command(TARGET run_tests POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-          ${CMAKE_SOURCE_DIR}/tests/fixtures/quaddicted_database.xml
-          ${CMAKE_BINARY_DIR}/quaddicted_database.xml
-        COMMENT "Copying test fixture..."
-    )
 endif()
-
 
 # Add tests
 add_test(NAME run_tests COMMAND run_tests)

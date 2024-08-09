@@ -21,7 +21,7 @@ target_link_libraries(shalrath
   resources
 )
 
-
+# Copy the DLLs if on Windows to the right directory
 if (MSVC)
     set(QT_WINDEPLOYQT_EXECUTABLE "C:/Qt/6.7.2/msvc2019_64/bin/windeployqt.exe")
 
