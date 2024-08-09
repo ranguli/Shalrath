@@ -59,12 +59,11 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y qt6-base-dev qt6-base-dev-tools qt6-tools-dev libgl1-mesa-dev libglu1-mesa-dev clang-tidy clang-format cppcheck
 
     - name: Install Qt on Windows (x64)
-      if: ${{ matrix.os == 'windows-2022' && matrix.tb-arch == 'x64' }}
+      if: ${{ matrix.os == 'windows-latest' && matrix.tb-arch == 'x64' }}
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.2.4'
         arch: 'win64_msvc2019_64'
-
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
