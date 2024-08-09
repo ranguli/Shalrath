@@ -65,7 +65,7 @@ if (MSVC)
     find_program(CLANG_FORMAT "clang-format"
         HINTS "C:/Program Files/LLVM/bin/"
     )
-elseif() 
+else() 
     find_program(CLANG_FORMAT "clang-format")
 endif()
 
@@ -84,7 +84,7 @@ if (MSVC)
     find_program(CLANG_TIDY "clang-tidy"
         HINTS "C:/Program Files/LLVM/bin/"
     )
-elseif()
+else()
     find_program(CLANG_TIDY "clang-tidy")
 endif()
 
