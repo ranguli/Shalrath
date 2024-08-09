@@ -59,7 +59,7 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y qt6-base-dev qt6-base-dev-tools qt6-tools-dev libgl1-mesa-dev libglu1-mesa-dev clang-tidy clang-format cppcheck
 
     - name: Install Qt on Windows (x64)
-      if: ${{ matrix.os == 'windows-latest' && matrix.tb-arch == 'x64' }}
+      if: ${{ matrix.os == 'windows-latest' }}
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.2.4'
