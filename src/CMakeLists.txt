@@ -23,10 +23,14 @@ target_link_libraries(shalrath
 
 # Copy the DLLs if on Windows to the right directory
 if (MSVC)
-    set(QT_WINDEPLOYQT_EXECUTABLE "C:/Qt/6.7.2/msvc2019_64/bin/windeployqt.exe")
+    find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "C:/Qt/6.7.2/msvc2019_64/bin")
 
-    add_custom_command(TARGET shalrath POST_BUILD
-    COMMAND ${QT_WINDEPLOYQT_EXECUTABLE} $<TARGET_FILE:shalrath>
-    COMMENT "Running windeployqt to deploy Qt dependencies..."
-)
+    if (WINDEPLOYQT_EXECUTABLE)
+        add_custom_command(TARGET shalrath POST_BUILD
+            COMMAND ${WINDEPLOYQT_EXECUTABLE} $<TARGET_FILE:shalrath>
+            COMMENT "Running windeployqt to deploy Qt dependencies..."
+        )
+    else()
+        message(WARNING "windeployqt not found, skipping deployment of Qt dependencies.")
+    endif()
 endif()
