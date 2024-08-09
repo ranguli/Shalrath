@@ -27,8 +27,6 @@ else()
         -Wconversion
         -Wsign-conversion
         -Wmisleading-indentation
-        -Wduplicated-cond
-        -Wlogical-op
         -Wnull-dereference
         -Wdouble-promotion
         -Wformat=2
