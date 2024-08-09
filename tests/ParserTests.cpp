@@ -19,7 +19,7 @@ using namespace testing;
 class QuaddictedXMLParserTest : public ::testing::Test {
   protected:
     QString loadFixture(const QString &fixtureName) {
-        QString fixturePath = QDir::currentPath() + "/tests/" + fixtureName;
+        QString fixturePath = QDir::currentPath() + "/" + fixtureName;
 
         QFile file(fixturePath);
         if (!file.exists()) {

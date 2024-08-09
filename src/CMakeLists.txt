@@ -20,3 +20,13 @@ target_link_libraries(shalrath
   parser_lib
   resources
 )
+
+
+if (MSVC)
+    set(QT_WINDEPLOYQT_EXECUTABLE "C:/Qt/6.7.2/msvc2019_64/bin/windeployqt.exe")
+
+    add_custom_command(TARGET shalrath POST_BUILD
+    COMMAND ${QT_WINDEPLOYQT_EXECUTABLE} $<TARGET_FILE:shalrath>
+    COMMENT "Running windeployqt to deploy Qt dependencies..."
+)
+endif()
