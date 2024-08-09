@@ -61,7 +61,7 @@ else()
     add_custom_command(TARGET run_tests POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
           ${CMAKE_SOURCE_DIR}/tests/fixtures/quaddicted_database.xml
-          ${CMAKE_BINARY_DIR}/tests/quaddicted_database.xml
+          ${CMAKE_BINARY_DIR}/quaddicted_database.xml
         COMMENT "Copying test fixture..."
     )
 endif()
