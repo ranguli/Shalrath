@@ -1,5 +1,7 @@
 # tests/CMakeLists.txt
 
+# Configure Google Test to use the same runtime library
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 # FetchContent module
 include(FetchContent)
