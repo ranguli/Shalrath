@@ -59,8 +59,16 @@ file(GLOB_RECURSE ALL_SOURCE_FILES
     "${PROJECT_SOURCE_DIR}/resources/*.h"
 )
 
-# Clang-format
-find_program(CLANG_FORMAT "clang-format")
+
+if (MSVC)
+    # Clang-format
+    find_program(CLANG_FORMAT "clang-format"
+        HINTS "C:/Program Files/LLVM/bin/"
+    )
+else() 
+    find_program(CLANG_FORMAT "clang-format")
+endif()
+
 if(CLANG_FORMAT)
     add_custom_target(clang_format
         COMMAND ${CLANG_FORMAT} -i ${ALL_SOURCE_FILES}
@@ -70,8 +78,16 @@ else()
     message(WARNING "clang-format not found!")
 endif()
 
-# Clang-tidy
-find_program(CLANG_TIDY "clang-tidy")
+
+if (MSVC)
+    # Clang-tidy
+    find_program(CLANG_TIDY "clang-tidy"
+        HINTS "C:/Program Files/LLVM/bin/"
+    )
+else()
+    find_program(CLANG_TIDY "clang-tidy")
+endif()
+
 if(CLANG_TIDY)
     add_custom_target(clang_tidy
         COMMAND ${CLANG_TIDY} -p ${CMAKE_BINARY_DIR} ${ALL_SOURCE_FILES}

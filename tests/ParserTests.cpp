@@ -18,23 +18,39 @@ using namespace testing;
 
 class QuaddictedXMLParserTest : public ::testing::Test {
   protected:
+    const QString fixtureContent = R"XML(
+    <files>
+        <file id="002blue" type="1" rating="" normalized_users_rating="3.03">
+	        <author>sodalimonada176</author>
+	        <title>Blue Is The Darkest Shade</title>
+	        <md5sum>922c3f80b8b0df8a3a97f97043462f12</md5sum>
+	        <size>593</size>
+	        <date>08.10.2022</date>
+	        <description><![CDATA[Small blue medieval castle map for vanilla Quake.<br /><br />
+
+            <i>"Since this is my second map, i decided to experiment more on the Z-axis with rooms on top of rooms and splitting paths. Still kinda small though, have fun =)"</i>]]></description>
+	        <tags>
+		        <tag>small</tag>
+		        <tag>medieval</tag>
+		        <tag>castle</tag>
+		        <tag>classic</tag>
+		        <tag>vanilla</tag>
+		        <tag>id1</tag>
+	        </tags>
+	        <techinfo>
+		        <zipbasedir>id1/maps/</zipbasedir>
+		        <startmap>blue</startmap>
+	        </techinfo>
+        </file>
+    </files>
+    )XML";
+
+    // Modify loadFixture to return the string instead of reading from a file
     QString loadFixture(const QString &fixtureName) {
-        QString fixturePath = QDir::currentPath() + "/tests/" + fixtureName;
+        Q_UNUSED(fixtureName); // Ignore the parameter since we don't need it anymore
 
-        QFile file(fixturePath);
-        if (!file.exists()) {
-            qDebug() << "File does not exist: " << fixturePath;
-        }
-
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            qDebug() << "Could not open file: " << fixturePath;
-            return "";
-        }
-
-        QTextStream in(&file);
-        QString content = in.readAll();
-        file.close();
-        return content;
+        // Return the fixture content directly
+        return fixtureContent;
     }
 
     QList<Map> parseFixture(const QString &fixtureName) {
