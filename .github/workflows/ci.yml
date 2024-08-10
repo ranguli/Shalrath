@@ -5,7 +5,6 @@ on:
       - '*'
 jobs:
   build:
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: '${{ matrix.os }}'
     strategy:
       fail-fast: false
@@ -55,8 +54,6 @@ jobs:
       - name: Build
         run: cmake --build build --config Release
   test:
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
-    needs: build
     runs-on: '${{ matrix.os }}'
     strategy:
       fail-fast: false
@@ -96,7 +93,6 @@ jobs:
         working-directory: build
         run: .\tests\Release\run_tests.exe
   lint:
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
