@@ -5,7 +5,7 @@
 ### Prerequisites
 
 ```sh
-sudo apt install cmake qt6-base-dev qt6-base-dev-tools qt6-tools-dev libgl1-mesa-dev libglu1-mesa-dev clang-tidy clang-format cppcheck
+sudo apt install cmake qt6-base-dev qt6-base-dev-tools qt6-tools-dev libgl1-mesa-dev libglu1-mesa-dev clang-tidy clang-format cppcheck build-essential
 ```
 
 ### Building
