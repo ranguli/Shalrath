@@ -59,6 +59,7 @@ jobs:
           path: build
 
   test:
+    needs: 'build'  
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
