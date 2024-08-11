@@ -99,6 +99,7 @@ endif()
 
 # Ensure clang-format runs before any build steps
 add_dependencies(shalrath clang_format)
+add_dependencies(core_lib clang_format)
 add_dependencies(ui_lib clang_format)
 add_dependencies(network_lib clang_format)
 add_dependencies(database_lib clang_format)

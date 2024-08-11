@@ -1,11 +1,12 @@
 #pragma once
 
 // NOLINTBEGIN
-#include <QDialog>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QVBoxLayout>
 // NOLINTEND
 
-class WelcomeDialog : public QDialog {
+class WelcomeDialog : public QMessageBox {
     Q_OBJECT
 
   public:
@@ -22,4 +23,7 @@ class WelcomeDialog : public QDialog {
 
   private:
     QVBoxLayout *layout;
+    QHBoxLayout *buttonLayout;
+    QPushButton *okButton;
+    QPushButton *cancelButton;
 };

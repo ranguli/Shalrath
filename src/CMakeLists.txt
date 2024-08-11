@@ -1,4 +1,5 @@
 # src/CMakeLists.txt
+add_subdirectory(Core)
 add_subdirectory(UI)
 add_subdirectory(Database)
 add_subdirectory(Model)
@@ -13,6 +14,7 @@ target_include_directories(shalrath
 )
 
 target_link_libraries(shalrath
+  core_lib
   ui_lib
   network_lib
   database_lib

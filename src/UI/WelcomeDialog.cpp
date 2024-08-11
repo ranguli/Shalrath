@@ -1,18 +1,17 @@
-#include "WelcomeDialog.h"
-
 // NOLINTBEGIN
-#include <QLabel>
-#include <QPushButton>
-#include <QVBoxLayout>
+#include <QMessageBox>
 // NOLINTEND
 
-WelcomeDialog::WelcomeDialog(QWidget *parent) : QDialog(parent), layout(new QVBoxLayout(this)) {
-    // layout is explicitly initialized in the initializer list
-    QLabel *welcomeMessage = new QLabel(tr("Welcome to the Application!"), this);
-    layout->addWidget(welcomeMessage);
+#include "WelcomeDialog.h"
 
-    QPushButton *okButton = new QPushButton(tr("OK"), this);
-    layout->addWidget(okButton);
+WelcomeDialog::WelcomeDialog(QWidget *parent) : QMessageBox(parent) {
 
-    connect(okButton, &QPushButton::clicked, this, &QDialog::accept);
+    setIcon(QMessageBox::Information);
+    setWindowTitle(tr("Welcome"));
+    setText(tr("Welcome to Shalrath!"));
+
+    addButton(QMessageBox::Ok);
+    addButton(QMessageBox::Cancel);
+
+    setDefaultButton(QMessageBox::Ok);
 }
