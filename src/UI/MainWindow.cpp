@@ -14,6 +14,9 @@
 #include "RightPane.h"
 #include "StatusBar.h"
 
+const int WINDOW_WIDTH = 1280;
+const int WINDOW_HEIGHT = 960;
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), networkManager(new NetworkManager(this)) {
     connect(this, &MainWindow::updateDatabaseRequested, networkManager, &NetworkManager::downloadMapDatabase);
     connect(networkManager, &NetworkManager::downloadStarted, this, &MainWindow::handleMapDatabaseTaskStarted);
@@ -24,17 +27,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), networkManager(ne
     setupUI();
 }
 
-MainWindow::~MainWindow() {
-}
-
 void MainWindow::setupUI() {
     setWindowTitle("Hello World");
-    resize(1280, 960);
+    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    QWidget *centralWidget = new QWidget(this);
+    auto *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
-    QSplitter *splitter = new QSplitter;
+    auto *splitter = new QSplitter(this);
 
     auto leftPane = new LeftPane(this);
     auto rightPane = new RightPane(this);
@@ -45,7 +45,7 @@ void MainWindow::setupUI() {
     splitter->setStretchFactor(0, 4);
     splitter->setStretchFactor(1, 1);
 
-    QVBoxLayout *centralLayout = new QVBoxLayout(centralWidget);
+    auto *centralLayout = new QVBoxLayout(centralWidget);
     centralLayout->addWidget(splitter);
 
     QMenuBar *menuBar = this->menuBar();
@@ -62,6 +62,14 @@ void MainWindow::setupUI() {
     setStatusBar(statusBar);
 
     connect(networkManager, &NetworkManager::downloadFinished, statusBar, &StatusBar::displayMessage);
+}
+
+void MainWindow::initialize() {
+    // This probably should be implemented elsewhere outside of the UI code, but called here.
+
+    // 1. Download the map database in-memory
+    // 2. Parse it with the QuaddictedXMLParser
+    // 3. Update the database
 }
 
 void MainWindow::updateMapDatabase() {

@@ -1,8 +1,9 @@
 #pragma once
 
+// NOLINTBEGIN
 #include <QLabel>
-#include <QPixmap>
 #include <QStatusBar>
+// NOLINTEND
 
 class StatusBar : public QStatusBar {
     Q_OBJECT

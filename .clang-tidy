@@ -1,0 +1,6 @@
+---
+    Checks:              '-*, modernize-*, cppcoreguidelines-*,modernize-make-unique,modernize-make-shared,-cppcoreguidelines-init-variables,-cppcoreguidelines-pro-type-member-init'
+    WarningsAsErrors:    '*'
+    HeaderFilterRegex:   '^.*src/.*'
+    InheritParentConfig: true
+---

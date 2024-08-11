@@ -10,7 +10,15 @@ class MainWindow : public QMainWindow {
 
   public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override = default;
+
+    // Delete copy operations to prevent copying
+    MainWindow(const MainWindow &) = delete;                     // Explicitly delete the copy constructor
+    auto operator=(const MainWindow &) -> MainWindow & = delete; // Delete copy assignment
+
+    // Default move operations for efficiency
+    MainWindow(MainWindow &&) noexcept = default;                     // Default move constructor
+    auto operator=(MainWindow &&) noexcept -> MainWindow & = default; // Default move assignment
 
   signals:
     void updateDatabaseRequested();
@@ -30,4 +38,5 @@ class MainWindow : public QMainWindow {
     StatusBar *statusBar;
 
     void setupUI();
+    void initialize();
 };

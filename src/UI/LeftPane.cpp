@@ -11,12 +11,12 @@ LeftPane::LeftPane(QWidget *parent) : QWidget(parent) {
 }
 
 void LeftPane::setupUI() {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    auto *layout = new QVBoxLayout(this);
 
     // Add a horizontal layout for the "Search" label and the line edit
-    auto *searchLayout = new QHBoxLayout;
-    auto *searchLabel = new QLabel("Search");
-    searchLineEdit = new QLineEdit;
+    auto *searchLayout = new QHBoxLayout(this);
+    auto *searchLabel = new QLabel("Search", this);
+    searchLineEdit = new QLineEdit(this);
     searchLayout->addWidget(searchLabel);
     searchLayout->addWidget(searchLineEdit);
 
@@ -24,7 +24,7 @@ void LeftPane::setupUI() {
     layout->addLayout(searchLayout);
 
     // Add a table below the search layout
-    table = new QTableWidget(50, 8); // 50 rows and 8 columns for example
+    table = new QTableWidget(50, 8); // NOLINT(cppcoreguidelines-owning-memory)
     table->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Set the table headers
@@ -66,34 +66,36 @@ void LeftPane::setupUI() {
     // Populate the table with icons in "Installed" and "Favorited" columns
     for (int row = 0; row < table->rowCount(); ++row) {
         // Add download icon to "Installed" column
-        auto *installedItem = new QTableWidgetItem;
+        auto *installedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
         installedItem->setIcon(downloadIcon);
         table->setItem(row, 0, installedItem);
 
         // Add heart icon to "Favorited" column
-        auto *favoritedItem = new QTableWidgetItem;
+        auto *favoritedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
         favoritedItem->setIcon(favoriteIcon);
         table->setItem(row, 1, favoritedItem);
 
         // Add other items as examples
+        // NOLINTBEGIN(cppcoreguidelines-owning-memory)
         table->setItem(row, 2, new QTableWidgetItem("Filename"));
         table->setItem(row, 3, new QTableWidgetItem("Title"));
         table->setItem(row, 4, new QTableWidgetItem("Description"));
         table->setItem(row, 5, new QTableWidgetItem("Author"));
         table->setItem(row, 6, new QTableWidgetItem("Date Released"));
+        // NOLINTEND(cppcoreguidelines-owning-memory)
 
         // Add star icons and review text to "User Ratings" column
-        auto *ratingWidget = new QWidget();
+        auto *ratingWidget = new QWidget(this);
         auto *ratingLayout = new QHBoxLayout(ratingWidget);
 
         ratingLayout->setContentsMargins(0, 0, 0, 0);
         ratingLayout->setSpacing(2);
         for (int i = 0; i < 5; ++i) {
-            auto *starLabel = new QLabel();
+            auto *starLabel = new QLabel(this);
             starLabel->setPixmap(starIcon.pixmap(16, 16));
             ratingLayout->addWidget(starLabel);
         }
-        auto *reviewLabel = new QLabel("(42 reviews)");
+        auto *reviewLabel = new QLabel("(42 reviews)", this);
         ratingLayout->addWidget(reviewLabel);
         ratingWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         table->setCellWidget(row, 7, ratingWidget);

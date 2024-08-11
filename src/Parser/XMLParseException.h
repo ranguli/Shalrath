@@ -1,12 +1,17 @@
+// NOLINTBEGIN
 #include <exception>
 #include <string>
+// NOLINTEND
 
-class XMLParseException : public std::exception {
+using std::exception;
+using std::string;
+
+class XMLParseException : public exception {
   public:
-    explicit XMLParseException(const std::string &message) : msg_(message) {}
+    explicit XMLParseException(const string &message) : msg_(message) {}
 
-    virtual const char *what() const noexcept override { return msg_.c_str(); }
+    [[nodiscard]] auto what() const noexcept -> const char * override { return msg_.c_str(); }
 
   private:
-    std::string msg_;
+    string msg_;
 };

@@ -1,7 +1,9 @@
 #pragma once
 
+// NOLINTBEGIN
 #include <string>
 #include <vector>
+// NOLINTEND
 
 using std::string;
 using std::vector;
@@ -12,20 +14,20 @@ class Map {
     Map() = default;
 
     // Getters
-    string getMapID() const;
-    int getType() const;
-    double getNormalizedUsersRating() const;
-    string getAuthor() const;
-    string getTitle() const;
-    string getMD5Sum() const;
-    int getSize() const;
-    string getDate() const;
-    string getDescription() const;
-    const vector<string> &getTags() const;
-    string getZipBaseDir() const;
-    string getCommandLine() const;
-    string getStartMap() const;
-    vector<unsigned char> getThumbnail() const;
+    [[nodiscard]] auto getMapID() const -> string;
+    [[nodiscard]] auto getType() const -> int;
+    [[nodiscard]] auto getNormalizedUsersRating() const -> double;
+    [[nodiscard]] auto getAuthor() const -> string;
+    [[nodiscard]] auto getTitle() const -> string;
+    [[nodiscard]] auto getMD5Sum() const -> string;
+    [[nodiscard]] auto getSize() const -> int;
+    [[nodiscard]] auto getDate() const -> string;
+    [[nodiscard]] auto getDescription() const -> string;
+    [[nodiscard]] auto getTags() const -> const vector<string> &;
+    [[nodiscard]] auto getZipBaseDir() const -> string;
+    [[nodiscard]] auto getCommandLine() const -> string;
+    [[nodiscard]] auto getStartMap() const -> string;
+    [[nodiscard]] auto getThumbnail() const -> vector<unsigned char>;
 
     // Setters
     void setMapID(const string &new_map_id);
@@ -44,18 +46,18 @@ class Map {
     void setThumbnail(const vector<unsigned char> &new_thumbnail);
 
   private:
-    string map_id;
+    string mapID;
     int type = 0;
-    double normalized_users_rating = 0.0;
+    double normalizedUsersRating = 0.0;
     string author;
     string title;
-    string md5sum;
+    string MD5Sum;
     int size = 0;
     string date;
     string description;
     vector<string> tags;
-    string zipbasedir;
-    string commandline;
-    string startmap;
+    string zipBaseDir;
+    string commandLine;
+    string startMap;
     vector<unsigned char> thumbnail;
 };

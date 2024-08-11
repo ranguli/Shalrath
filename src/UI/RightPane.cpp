@@ -1,12 +1,19 @@
 #include "RightPane.h"
 
+// NOLINTBEGIN
+#include <QFrame>
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QPixmap>
 #include <QVBoxLayout>
+// NOLINTEND
 
 RightPane::RightPane(QWidget *parent) : QFrame(parent) {
     setupUI();
 }
+
+const int THUMBNAIL_MAX_WIDTH = 300;
+const int THUMBNAIL_MAX_HEIGHT = 200;
 
 void RightPane::setupUI() {
     setFrameShape(QFrame::Box); // Example frame shape
@@ -15,27 +22,25 @@ void RightPane::setupUI() {
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     // Add an image placeholder at the top
-    imageLabel = new QLabel;
+    imageLabel = new QLabel(this);
 
     // Load and scale the image
     QPixmap pixmap(":/image.png");
-    int maxWidth = 300;  // Example max width
-    int maxHeight = 200; // Example max height
-    QPixmap scaledPixmap = pixmap.scaled(maxWidth, maxHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QPixmap scaledPixmap = pixmap.scaled(THUMBNAIL_MAX_WIDTH, THUMBNAIL_MAX_HEIGHT, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     imageLabel->setPixmap(scaledPixmap);
     imageLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(imageLabel);
 
     // Add a text widget below the image
-    textBrowser = new QTextBrowser;
+    textBrowser = new QTextBrowser(this);
     textBrowser->setText("This is a placeholder for a paragraph of text. It is "
                          "not editable by the user.");
     layout->addWidget(textBrowser);
 
     // Add a horizontal layout for the "Install" and "Uninstall" buttons
-    auto *installationButtons = new QHBoxLayout;
-    installButton = new QPushButton("Install");
-    uninstallButton = new QPushButton("Uninstall");
+    auto *installationButtons = new QHBoxLayout(this);
+    installButton = new QPushButton("Install", this);
+    uninstallButton = new QPushButton("Uninstall", this);
 
     installationButtons->addWidget(installButton);
     installationButtons->addWidget(uninstallButton);
@@ -43,9 +48,9 @@ void RightPane::setupUI() {
     layout->addLayout(installationButtons);
 
     // Add a horizontal layout for the "Play" button and episode selection
-    auto *playButtons = new QHBoxLayout;
-    playButton = new QPushButton("Play");
-    episodeSelectButton = new QComboBox();
+    auto *playButtons = new QHBoxLayout(this);
+    playButton = new QPushButton("Play", this);
+    episodeSelectButton = new QComboBox(this);
 
     playButtons->addWidget(playButton);
     playButtons->addWidget(episodeSelectButton);
