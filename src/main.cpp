@@ -6,7 +6,7 @@
 #include "MainWindow.h"
 #include "WelcomeDialog.h"
 
-int main(int argc, char *argv[]) {
+auto main(int argc, char *argv[]) -> int {
     QApplication app(argc, argv);
 
     // Use QSettings to check if the welcome dialog has been shown
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     MainWindow mainWindow;
     mainWindow.show();
 
-    if (hasSeenWelcomeDialog) {
+    if (!hasSeenWelcomeDialog) {
         WelcomeDialog welcomeDialog;
         if (welcomeDialog.exec() == QDialog::Accepted) {
             settings.setValue("hasSeenWelcomeDialog", true);

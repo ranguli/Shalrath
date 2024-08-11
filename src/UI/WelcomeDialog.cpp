@@ -6,9 +6,8 @@
 #include <QVBoxLayout>
 // NOLINTEND
 
-WelcomeDialog::WelcomeDialog(QWidget *parent) : QDialog(parent) {
-    QVBoxLayout *layout = new QVBoxLayout(this);
-
+WelcomeDialog::WelcomeDialog(QWidget *parent) : QDialog(parent), layout(new QVBoxLayout(this)) {
+    // layout is explicitly initialized in the initializer list
     QLabel *welcomeMessage = new QLabel(tr("Welcome to the Application!"), this);
     layout->addWidget(welcomeMessage);
 
@@ -16,8 +15,4 @@ WelcomeDialog::WelcomeDialog(QWidget *parent) : QDialog(parent) {
     layout->addWidget(okButton);
 
     connect(okButton, &QPushButton::clicked, this, &QDialog::accept);
-}
-
-WelcomeDialog::~WelcomeDialog() {
-    // Clean up if necessary
 }
