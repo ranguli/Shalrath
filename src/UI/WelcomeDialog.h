@@ -23,7 +23,4 @@ class WelcomeDialog : public QMessageBox {
 
   private:
     QVBoxLayout *layout;
-    QHBoxLayout *buttonLayout;
-    QPushButton *okButton;
-    QPushButton *cancelButton;
 };
