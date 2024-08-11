@@ -30,4 +30,5 @@ class MainWindow : public QMainWindow {
     StatusBar *statusBar;
 
     void setupUI();
+    void initialize();
 };

@@ -1,0 +1,933 @@
+{
+   Memcheck:Cond
+   fun:_ZN15QtWaylandClient19QWaylandInputDevice8Keyboard12keyboard_keyEjjjj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_display_dispatch_queue_pending
+   fun:_ZN15QtWaylandClient15QWaylandDisplay13flushRequestsEv
+   fun:_ZN7QObject5eventEP6QEvent
+   fun:_ZN19QApplicationPrivate13notify_helperEP7QObjectP6QEvent
+   fun:_ZN16QCoreApplication15notifyInternal2EP7QObjectP6QEvent
+   fun:_ZN23QCoreApplicationPrivate16sendPostedEventsEP7QObjectiP11QThreadData
+}
+{
+   Memcheck:Addr4
+   fun:pthread_mutex_lock@@GLIBC_2.2.5
+   fun:wl_event_queue_destroy
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Addr4
+   fun:__pthread_mutex_lock_full
+   fun:wl_event_queue_destroy
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Addr4
+   fun:__pthread_mutex_unlock_usercnt
+   fun:pthread_mutex_unlock@@GLIBC_2.2.5
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Addr4
+   fun:__pthread_mutex_unlock_usercnt
+   fun:pthread_mutex_unlock@@GLIBC_2.2.5
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:g_malloc
+   fun:g_strdup
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:g_malloc
+   fun:g_list_append
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:px_manager_new_with_options
+   fun:px_proxy_factory_new
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+   fun:_ZN20QNetworkProxyFactory19systemProxyForQueryERK18QNetworkProxyQuery
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+   fun:_ZN20QNetworkProxyFactory13proxyForQueryERK18QNetworkProxyQuery
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient15QWaylandDisplayC1EPNS_19QWaylandIntegrationE
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationC1Ev
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforms/libqwayland-generic.so
+   fun:_ZN22QGuiApplicationPrivate25createPlatformIntegrationEv
+   fun:_ZN22QGuiApplicationPrivate21createEventDispatcherEv
+   fun:_ZN23QCoreApplicationPrivate4initEv
+   fun:_ZN22QGuiApplicationPrivate4initEv
+   fun:_ZN19QApplicationPrivate4initEv
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland13wl_compositor4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland6wl_shm4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient11QWaylandShmC1EPNS_15QWaylandDisplayEij
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland9wl_output4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient14QWaylandScreenC1EPNS_15QWaylandDisplayEij
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland22zxdg_output_manager_v14initEP11wl_registryji
+   fun:_ZN15QtWaylandClient26QWaylandXdgOutputManagerV1C1EPNS_15QWaylandDisplayEjj
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland39zwp_primary_selection_device_manager_v14initEP11wl_registryji
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland16wl_subcompositor4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland23zwp_pointer_gestures_v14initEP11wl_registryji
+   fun:_ZN15QtWaylandClient23QWaylandPointerGesturesC1EPNS_15QWaylandDisplayEjj
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland21zwp_tablet_manager_v24initEP11wl_registryji
+   fun:_ZN15QtWaylandClient23QWaylandTabletManagerV2C1EPNS_15QWaylandDisplayEjj
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland7wl_seat4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient19QWaylandInputDeviceC1EPNS_15QWaylandDisplayEij
+   fun:_ZNK15QtWaylandClient19QWaylandIntegration17createInputDeviceEPNS_15QWaylandDisplayEij
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient19QWaylandInputDevice17seat_capabilitiesEj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_display_dispatch_queue_pending
+   fun:wl_display_roundtrip_queue
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient19QWaylandInputDevice17seat_capabilitiesEj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_display_dispatch_queue_pending
+   fun:wl_display_roundtrip_queue
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:g_malloc
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:px_manager_new_with_options
+   fun:px_proxy_factory_new
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+   fun:_ZN20QNetworkProxyFactory19systemProxyForQueryERK18QNetworkProxyQuery
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient23QWaylandXdgActivationV125requestXdgActivationTokenEPNS_15QWaylandDisplayEP10wl_surfacejRK7QString
+   fun:_ZN15QtWaylandClient18QWaylandXdgSurface15requestActivateEv
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN15QGuiApplication18focusObjectChangedEP7QObject
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN7QWindow18focusObjectChangedEP7QObject
+   fun:_ZN7QWidget8setFocusEN2Qt11FocusReasonE
+   fun:_ZN12QApplication15setActiveWindowEP7QWidget
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:_ZN10QClipboard7setTextERK7QStringNS_4ModeE
+   fun:_ZNK18QWidgetLineControl4copyEN10QClipboard4ModeE
+   fun:_ZN18QWidgetLineControl15processKeyEventEP9QKeyEvent
+   fun:_ZN9QLineEdit13keyPressEventEP9QKeyEvent
+   fun:_ZN7QWidget5eventEP6QEvent
+   fun:_ZN19QApplicationPrivate13notify_helperEP7QObjectP6QEvent
+   fun:_ZN12QApplication6notifyEP7QObjectP6QEvent
+   fun:_ZN16QCoreApplication15notifyInternal2EP7QObjectP6QEvent
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.4.2
+   fun:_ZN19QApplicationPrivate13notify_helperEP7QObjectP6QEvent
+   fun:_ZN16QCoreApplication15notifyInternal2EP7QObjectP6QEvent
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   fun:g_thread_pool_new_full
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_task_get_type
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_dbus_proxy_new_for_bus
+   obj:/usr/lib/x86_64-linux-gnu/libgdk-3.so.0.2409.32
+   fun:gdk_display_manager_open_display
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_task_get_type
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_dbus_proxy_new_for_bus
+   obj:/usr/lib/x86_64-linux-gnu/libgdk-3.so.0.2409.32
+   fun:gdk_display_manager_open_display
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:start_thread
+   fun:clone
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:g_object_new
+   fun:g_settings_new_full
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   fun:_ZN7QThread5startENS_8PriorityE
+   fun:_ZN15QDBusConnection12connectToBusERK7QStringS2_
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   fun:_ZN28QPlatformInputContextFactory6createERK7QString
+   fun:_ZN15QtWaylandClient19QWaylandIntegration23reconfigureInputContextEv
+   fun:_ZN15QtWaylandClient19QWaylandIntegration10initializeEv
+   fun:_ZN23QCoreApplicationPrivate4initEv
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient23QWaylandXdgActivationV125requestXdgActivationTokenEPNS_15QWaylandDisplayEP10wl_surfacejRK7QString
+   fun:_ZN15QtWaylandClient18QWaylandXdgSurface15requestActivateEv
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN15QGuiApplication18focusObjectChangedEP7QObject
+   fun:_ZN22QGuiApplicationPrivate21processActivatedEventEPN29QWindowSystemInterfacePrivate20ActivatedWindowEventE
+   fun:_ZN22QWindowSystemInterface22sendWindowSystemEventsE6QFlagsIN10QEventLoop17ProcessEventsFlagEE
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient23QWaylandXdgActivationV125requestXdgActivationTokenEPNS_15QWaylandDisplayEP10wl_surfacejRK7QString
+   fun:_ZN15QtWaylandClient18QWaylandXdgSurface15requestActivateEv
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN15QGuiApplication18focusObjectChangedEP7QObject
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN7QWindow18focusObjectChangedEP7QObject
+   fun:_ZN7QWidget8setFocusEN2Qt11FocusReasonE
+   fun:_ZN19QApplicationPrivate31giveFocusAccordingToFocusPolicyEP7QWidgetP6QEvent6QPoint
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:*
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0
+   fun:_ZN15QtWaylandClient34QWaylandEglClientBufferIntegration10initializeEPNS_15QWaylandDisplayE
+   fun:_ZN15QtWaylandClient19QWaylandIntegration33initializeClientBufferIntegrationEv
+   fun:_ZNK15QtWaylandClient15QWaylandDisplay23clientBufferIntegrationEv
+   fun:_ZNK15QtWaylandClient15QWaylandDisplay24supportsWindowDecorationEv
+   fun:_ZN15QtWaylandClient14QWaylandWindow16createDecorationEv
+   fun:_ZN15QtWaylandClient14QWaylandWindow10initWindowEv
+   fun:_ZN15QtWaylandClient14QWaylandWindow10setVisibleEb
+   fun:_ZN14QWidgetPrivate8show_sysEv
+}
+{
+   Memcheck:Addr4
+   fun:pthread_mutex_lock@@GLIBC_2.2.5
+   fun:wl_event_queue_destroy
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Addr4
+   fun:__pthread_mutex_lock_full
+   fun:wl_event_queue_destroy
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Addr4
+   fun:__pthread_mutex_unlock_usercnt
+   fun:pthread_mutex_unlock@@GLIBC_2.2.5
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Addr4
+   fun:__pthread_mutex_unlock_usercnt
+   fun:pthread_mutex_unlock@@GLIBC_2.2.5
+   fun:_ZN15QtWaylandClient15QWaylandDisplayD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD1Ev
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationD0Ev
+   fun:_ZN22QGuiApplicationPrivateD1Ev
+   fun:_ZN19QApplicationPrivateD0Ev
+   fun:main
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:g_malloc
+   fun:g_strdup
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:g_malloc
+   fun:g_list_append
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:px_manager_new_with_options
+   fun:px_proxy_factory_new
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+   fun:_ZN20QNetworkProxyFactory19systemProxyForQueryERK18QNetworkProxyQuery
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+   fun:_ZN20QNetworkProxyFactory13proxyForQueryERK18QNetworkProxyQuery
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient15QWaylandDisplayC1EPNS_19QWaylandIntegrationE
+   fun:_ZN15QtWaylandClient19QWaylandIntegrationC1Ev
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforms/libqwayland-generic.so
+   fun:_ZN22QGuiApplicationPrivate25createPlatformIntegrationEv
+   fun:_ZN22QGuiApplicationPrivate21createEventDispatcherEv
+   fun:_ZN23QCoreApplicationPrivate4initEv
+   fun:_ZN22QGuiApplicationPrivate4initEv
+   fun:_ZN19QApplicationPrivate4initEv
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland13wl_compositor4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland6wl_shm4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient11QWaylandShmC1EPNS_15QWaylandDisplayEij
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland9wl_output4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient14QWaylandScreenC1EPNS_15QWaylandDisplayEij
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland22zxdg_output_manager_v14initEP11wl_registryji
+   fun:_ZN15QtWaylandClient26QWaylandXdgOutputManagerV1C1EPNS_15QWaylandDisplayEjj
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland39zwp_primary_selection_device_manager_v14initEP11wl_registryji
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland16wl_subcompositor4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland23zwp_pointer_gestures_v14initEP11wl_registryji
+   fun:_ZN15QtWaylandClient23QWaylandPointerGesturesC1EPNS_15QWaylandDisplayEjj
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland21zwp_tablet_manager_v24initEP11wl_registryji
+   fun:_ZN15QtWaylandClient23QWaylandTabletManagerV2C1EPNS_15QWaylandDisplayEjj
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_constructor_versioned
+   fun:_ZN9QtWayland7wl_seat4initEP11wl_registryji
+   fun:_ZN15QtWaylandClient19QWaylandInputDeviceC1EPNS_15QWaylandDisplayEij
+   fun:_ZNK15QtWaylandClient19QWaylandIntegration17createInputDeviceEPNS_15QWaylandDisplayEij
+   fun:_ZN15QtWaylandClient15QWaylandDisplay15registry_globalEjRK7QStringj
+   fun:_ZN9QtWayland11wl_registry13handle_globalEPvP11wl_registryjPKcj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient19QWaylandInputDevice17seat_capabilitiesEj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_display_dispatch_queue_pending
+   fun:wl_display_roundtrip_queue
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient19QWaylandInputDevice17seat_capabilitiesEj
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   obj:/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4
+   fun:ffi_call
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_display_dispatch_queue_pending
+   fun:wl_display_roundtrip_queue
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient23QWaylandXdgActivationV125requestXdgActivationTokenEPNS_15QWaylandDisplayEP10wl_surfacejRK7QString
+   fun:_ZN15QtWaylandClient18QWaylandXdgSurface15requestActivateEv
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN15QGuiApplication18focusObjectChangedEP7QObject
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN7QWindow18focusObjectChangedEP7QObject
+   fun:_ZN7QWidget8setFocusEN2Qt11FocusReasonE
+   fun:_ZN12QApplication15setActiveWindowEP7QWidget
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:g_malloc
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:px_manager_new_with_options
+   fun:px_proxy_factory_new
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+   fun:_ZN20QNetworkProxyFactory19systemProxyForQueryERK18QNetworkProxyQuery
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient23QWaylandXdgActivationV125requestXdgActivationTokenEPNS_15QWaylandDisplayEP10wl_surfacejRK7QString
+   fun:_ZN15QtWaylandClient18QWaylandXdgSurface15requestActivateEv
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN15QGuiApplication18focusObjectChangedEP7QObject
+   fun:_ZN22QGuiApplicationPrivate21processActivatedEventEPN29QWindowSystemInterfacePrivate20ActivatedWindowEventE
+   fun:_ZN22QWindowSystemInterface22sendWindowSystemEventsE6QFlagsIN10QEventLoop17ProcessEventsFlagEE
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient23QWaylandXdgActivationV125requestXdgActivationTokenEPNS_15QWaylandDisplayEP10wl_surfacejRK7QString
+   fun:_ZN15QtWaylandClient18QWaylandXdgSurface15requestActivateEv
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN15QGuiApplication18focusObjectChangedEP7QObject
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN7QWindow18focusObjectChangedEP7QObject
+   fun:_ZN7QWidget8setFocusEN2Qt11FocusReasonE
+   fun:_ZN17QAbstractItemView4editERK11QModelIndexNS_11EditTriggerEP6QEvent
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   fun:g_thread_pool_new_full
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_task_get_type
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_dbus_proxy_new_for_bus
+   obj:/usr/lib/x86_64-linux-gnu/libgdk-3.so.0.2409.32
+   fun:gdk_display_manager_open_display
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_task_get_type
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   fun:g_dbus_proxy_new_for_bus
+   obj:/usr/lib/x86_64-linux-gnu/libgdk-3.so.0.2409.32
+   fun:gdk_display_manager_open_display
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:start_thread
+   fun:clone
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0
+   fun:g_object_new_valist
+   fun:g_object_new
+   fun:g_settings_new_full
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   fun:_ZN7QThread5startENS_8PriorityE
+   fun:_ZN15QDBusConnection12connectToBusERK7QStringS2_
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   obj:/usr/lib/x86_64-linux-gnu/qt6/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   fun:_ZN28QPlatformInputContextFactory6createERK7QString
+   fun:_ZN15QtWaylandClient19QWaylandIntegration23reconfigureInputContextEv
+   fun:_ZN15QtWaylandClient19QWaylandIntegration10initializeEv
+   fun:_ZN23QCoreApplicationPrivate4initEv
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0
+   fun:wl_proxy_marshal_array_flags
+   fun:wl_proxy_marshal_flags
+   fun:_ZN15QtWaylandClient23QWaylandXdgActivationV125requestXdgActivationTokenEPNS_15QWaylandDisplayEP10wl_surfacejRK7QString
+   fun:_ZN15QtWaylandClient18QWaylandXdgSurface15requestActivateEv
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN15QGuiApplication18focusObjectChangedEP7QObject
+   obj:/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
+   fun:_ZN7QWindow18focusObjectChangedEP7QObject
+   fun:_ZN7QWidget8setFocusEN2Qt11FocusReasonE
+   fun:_ZN19QApplicationPrivate31giveFocusAccordingToFocusPolicyEP7QWidgetP6QEvent6QPoint
+}
+{
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:*
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0
+   fun:_ZN15QtWaylandClient34QWaylandEglClientBufferIntegration10initializeEPNS_15QWaylandDisplayE
+   fun:_ZN15QtWaylandClient19QWaylandIntegration33initializeClientBufferIntegrationEv
+   fun:_ZNK15QtWaylandClient15QWaylandDisplay23clientBufferIntegrationEv
+   fun:_ZNK15QtWaylandClient15QWaylandDisplay24supportsWindowDecorationEv
+   fun:_ZN15QtWaylandClient14QWaylandWindow16createDecorationEv
+   fun:_ZN15QtWaylandClient14QWaylandWindow10initWindowEv
+   fun:_ZN15QtWaylandClient14QWaylandWindow10setVisibleEb
+   fun:_ZN14QWidgetPrivate8show_sysEv
+}

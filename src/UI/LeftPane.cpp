@@ -11,7 +11,7 @@ LeftPane::LeftPane(QWidget *parent) : QWidget(parent) {
 }
 
 void LeftPane::setupUI() {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    auto *layout = new QVBoxLayout(this);
 
     // Add a horizontal layout for the "Search" label and the line edit
     auto *searchLayout = new QHBoxLayout;

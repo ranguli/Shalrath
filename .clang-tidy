@@ -1,0 +1,8 @@
+---
+    Checks:              '-*, modernize-*, cppcoreguidelines-*,modernize-make-unique,modernize-make-shared'
+    WarningsAsErrors:    '*'
+    HeaderFileExtensions:         ['', 'h','hh','hpp','hxx']
+    ImplementationFileExtensions: ['c','cc','cpp','cxx']
+    HeaderFilterRegex:   '^.*src/.*'
+    InheritParentConfig: true
+---

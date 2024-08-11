@@ -1,8 +1,10 @@
 #pragma once
 
+// NOLINTBEGIN
 #include <QList>
 #include <QString>
 #include <QXmlStreamReader>
+// NOLINTEND
 
 #include "../Model/Map.h"
 

@@ -1,5 +1,4 @@
-#ifndef LEFTPANE_H
-#define LEFTPANE_H
+#pragma once
 
 #include <QLineEdit>
 #include <QTableWidget>
@@ -17,5 +16,3 @@ class LeftPane : public QWidget {
   private:
     void setupUI();
 };
-
-#endif // LEFTPANE_H

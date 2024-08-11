@@ -1,9 +1,12 @@
 #include "QuaddictedXMLParser.h"
 #include "XMLParseException.h"
+
+// NOLINTBEGIN
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <functional>
 #include <unordered_map>
+// NOLINTEND
 
 const QString ELEMENT_FILE = QStringLiteral("file");
 const QString ELEMENT_AUTHOR = QStringLiteral("author");

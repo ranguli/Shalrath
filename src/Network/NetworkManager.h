@@ -1,9 +1,11 @@
 #pragma once
 
+// NOLINTBEGIN
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QObject>
 #include <QString>
+// NOLINTEND
 
 class NetworkManager : public QObject {
     Q_OBJECT

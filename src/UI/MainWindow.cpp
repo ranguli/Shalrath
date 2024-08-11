@@ -31,10 +31,10 @@ void MainWindow::setupUI() {
     setWindowTitle("Hello World");
     resize(1280, 960);
 
-    QWidget *centralWidget = new QWidget(this);
+    auto *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
-    QSplitter *splitter = new QSplitter;
+    auto *splitter = new QSplitter;
 
     auto leftPane = new LeftPane(this);
     auto rightPane = new RightPane(this);
@@ -62,6 +62,14 @@ void MainWindow::setupUI() {
     setStatusBar(statusBar);
 
     connect(networkManager, &NetworkManager::downloadFinished, statusBar, &StatusBar::displayMessage);
+}
+
+void MainWindow::initialize() {
+    // This probably should be implemented elsewhere outside of the UI code, but called here.
+
+    // 1. Download the map database in-memory
+    // 2. Parse it with the QuaddictedXMLParser
+    // 3. Update the database
 }
 
 void MainWindow::updateMapDatabase() {

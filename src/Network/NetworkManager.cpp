@@ -1,8 +1,10 @@
 #include "NetworkManager.h"
 
+// NOLINTBEGIN
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QUrl>
+// NOLINTEND
 
 NetworkManager::NetworkManager(QObject *parent) : QObject(parent), networkManager(new QNetworkAccessManager(this)) {
     connect(networkManager, &QNetworkAccessManager::finished, this, &NetworkManager::onDownloadFinished);

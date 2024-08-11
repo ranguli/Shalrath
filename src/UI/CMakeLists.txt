@@ -12,6 +12,7 @@ set(ui_sources
     LeftPane.cpp
     RightPane.cpp
     StatusBar.cpp
+    WelcomeDialog.cpp
     ${QT_RESOURCES}
 )
 
@@ -20,6 +21,7 @@ set(ui_headers
     LeftPane.h
     RightPane.h
     StatusBar.h
+    WelcomeDialog.h
 )
 
 add_library(ui_lib ${ui_sources} ${ui_headers})
