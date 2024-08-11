@@ -13,6 +13,6 @@ void CommandLineOptions::parseArguments(const QStringList &arguments) {
     }
 }
 
-bool CommandLineOptions::isFirstRun() const {
+auto CommandLineOptions::isFirstRun() const -> bool {
     return firstRunFlag;
 }

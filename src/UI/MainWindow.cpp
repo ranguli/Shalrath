@@ -31,6 +31,8 @@ void MainWindow::setupUI() {
     setWindowTitle("Hello World");
     resize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
+    // Make an exemption for not using smart pointers because of how Qt manages its own memory
+    // NOLINTBEGIN(cppcoreguidelines-owning-memory)
     auto *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
@@ -59,6 +61,7 @@ void MainWindow::setupUI() {
     // QMenu *helpMenu = menuBar->addMenu("Help");
 
     statusBar = new StatusBar(this);
+    // NOLINTEND(cppcoreguidelines-owning-memory)
     setStatusBar(statusBar);
 
     connect(networkManager, &NetworkManager::downloadFinished, statusBar, &StatusBar::displayMessage);

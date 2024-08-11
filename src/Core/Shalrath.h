@@ -3,7 +3,7 @@
 #include <QApplication>
 #include <QStringList>
 
-class Shalrath : public QApplication {
+class Shalrath : public QApplication { // NOLINT(cppcoreguidelines-special-member-functions)
     Q_OBJECT
 
   public:

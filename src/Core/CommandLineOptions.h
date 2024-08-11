@@ -6,7 +6,7 @@ class CommandLineOptions {
   public:
     explicit CommandLineOptions(const QStringList &arguments);
 
-    bool isFirstRun() const;
+    [[nodiscard]] auto isFirstRun() const -> bool;
 
   private:
     bool firstRunFlag = false;

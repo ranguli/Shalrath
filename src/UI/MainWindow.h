@@ -5,20 +5,12 @@
 #include "NetworkManager.h"
 #include "StatusBar.h"
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow { // NOLINT(cppcoreguidelines-special-member-functions)
     Q_OBJECT
 
   public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override = default;
-
-    // Delete copy operations to prevent copying
-    MainWindow(const MainWindow &) = delete;                     // Explicitly delete the copy constructor
-    auto operator=(const MainWindow &) -> MainWindow & = delete; // Delete copy assignment
-
-    // Default move operations for efficiency
-    MainWindow(MainWindow &&) noexcept = default;                     // Default move constructor
-    auto operator=(MainWindow &&) noexcept -> MainWindow & = default; // Default move assignment
 
   signals:
     void updateDatabaseRequested();
