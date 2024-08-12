@@ -12,25 +12,25 @@ NetworkManager::NetworkManager(QObject *parent) : QObject(parent), networkManage
 
 void NetworkManager::downloadMapDatabase() {
     emit downloadStarted();
-    QNetworkRequest request{QUrl(mapDatabaseUrl)};
+    const QNetworkRequest request{QUrl(mapDatabaseUrl)};
     networkManager->get(request);
 }
 
 void NetworkManager::downloadMap(const QString &url) {
     emit downloadStarted();
-    QNetworkRequest request{QUrl(url)};
+    const QNetworkRequest request{QUrl(url)};
     networkManager->get(request);
 }
 
 void NetworkManager::downloadThumbnail(const QString &url) {
     emit downloadStarted();
-    QNetworkRequest request{QUrl(url)};
+    const QNetworkRequest request{QUrl(url)};
     networkManager->get(request);
 }
 
 void NetworkManager::onDownloadFinished(QNetworkReply *reply) {
     if (reply->error() == QNetworkReply::NoError) {
-        QString result = QString::fromUtf8(reply->readAll());
+        const QString result = QString::fromUtf8(reply->readAll());
         if (reply->url().toString() == mapDatabaseUrl) {
             emit downloadFinished("Map database updated");
         } else if (reply->url().toString().endsWith(".zip")) { // Assuming maps are zip files

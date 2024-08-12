@@ -10,9 +10,9 @@ class LeftPane : public QWidget {
   public:
     LeftPane(QWidget *parent = nullptr);
 
-    QTableWidget *table;
-    QLineEdit *searchLineEdit;
-
   private:
     void setupUI();
+
+    QTableWidget *table;
+    QLineEdit *searchLineEdit;
 };

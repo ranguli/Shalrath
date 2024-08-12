@@ -30,20 +30,20 @@ class Map {
     [[nodiscard]] auto getThumbnail() const -> vector<unsigned char>;
 
     // Setters
-    void setMapID(const string &new_map_id);
-    void setType(int new_type);
-    void setNormalizedUsersRating(double new_normalized_users_rating);
-    void setAuthor(const string &new_author);
-    void setTitle(const string &new_title);
-    void setMD5Sum(const string &new_md5sum);
-    void setSize(int new_size);
-    void setDate(const string &new_date);
-    void setDescription(const string &new_description);
+    void setMapID(const string &newMapID);
+    void setType(int newType);
+    void setNormalizedUsersRating(double newNormalizedUsersRating);
+    void setAuthor(const string &newAuthor);
+    void setTitle(const string &newTitle);
+    void setMD5Sum(const string &newMD5Sum);
+    void setSize(int newSize);
+    void setDate(const string &newDate);
+    void setDescription(const string &newDescription);
     void addTag(const std::string &tag);
-    void setZipBaseDir(const string &new_zipbasedir);
-    void setCommandLine(const string &new_commandline);
-    void setStartMap(const string &new_startmap);
-    void setThumbnail(const vector<unsigned char> &new_thumbnail);
+    void setZipBaseDir(const string &newZipBaseDir);
+    void setCommandLine(const string &newCommandline);
+    void setStartMap(const string &newStartmap);
+    void setThumbnail(const vector<unsigned char> &newThumbnail);
 
   private:
     string mapID;
