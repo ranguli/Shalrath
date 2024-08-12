@@ -1,6 +1,45 @@
 ---
-    Checks:              '-*, modernize-*, cppcoreguidelines-*,modernize-make-unique,modernize-make-shared,-cppcoreguidelines-init-variables,-cppcoreguidelines-pro-type-member-init'
+    Checks: >
+      -*,
+      modernize-*,
+      cppcoreguidelines-*,
+      -cppcoreguidelines-init-variables,
+      -cppcoreguidelines-pro-type-member-init,
+      readability-*,
+      bugprone-*,
+      cert-*,
+      misc-*,
+      performance-*,
+      portability-*,
+      clang-analyzer-core,
+      clang-analyzer-cplusplus,
+      clang-analzyer-deadcode,
+      clang-analyzer-nullability,
+      clang-analyzer-security-*,
+      -misc-include-cleaner
+
     WarningsAsErrors:    '*'
     HeaderFilterRegex:   '^.*src/.*'
     InheritParentConfig: true
+
+    CheckOptions:
+      - key: readability-identifier-naming.ClassCase
+        value: CamelCase
+      - key: readability-identifier-naming.MethodCase
+        value: camelBack
+      - key: readability-identifier-naming.ConstantCase
+        value: camelBack
+
+      - key: readability-identifier-naming.ClassPrefix
+        value: ''
+      - key: readability-identifier-naming.ClassSuffix
+        value: ''
+      - key: readability-identifier-naming.MethodPrefix
+        value: ''
+      - key: readability-identifier-naming.MethodSuffix
+        value: ''
+      - key: readability-identifier-naming.ConstantPrefix
+        value: ''
+      - key: readability-identifier-naming.ConstantSuffix
+        value: ''
 ---

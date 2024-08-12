@@ -12,8 +12,8 @@ RightPane::RightPane(QWidget *parent) : QFrame(parent) {
     setupUI();
 }
 
-const int THUMBNAIL_MAX_WIDTH = 300;
-const int THUMBNAIL_MAX_HEIGHT = 200;
+const int thumbnailMaxWidth = 300;
+const int thumbnailMaxHeight = 200;
 
 void RightPane::setupUI() {
     setFrameShape(QFrame::Box); // Example frame shape
@@ -28,8 +28,8 @@ void RightPane::setupUI() {
     imageLabel = new QLabel(this);
 
     // Load and scale the image
-    QPixmap pixmap(":/image.png");
-    QPixmap scaledPixmap = pixmap.scaled(THUMBNAIL_MAX_WIDTH, THUMBNAIL_MAX_HEIGHT, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    const QPixmap pixmap(":/hello.png");
+    const QPixmap scaledPixmap = pixmap.scaled(thumbnailMaxWidth, thumbnailMaxHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     imageLabel->setPixmap(scaledPixmap);
     imageLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(imageLabel);

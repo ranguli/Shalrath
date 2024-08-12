@@ -68,22 +68,22 @@ void QuaddictedXMLParser::parseFileElementAttributes(QXmlStreamReader &xml, Map 
 
 void QuaddictedXMLParser::parseFileElementChildren(QXmlStreamReader &xml, Map &map) {
     static const std::unordered_map<QString, std::function<void(QXmlStreamReader &, Map &)>> elementHandlers = {
-        {ELEMENT_AUTHOR, [](QXmlStreamReader &reader, Map &m) { m.setAuthor(reader.readElementText().toStdString()); }},
-        {ELEMENT_TITLE, [](QXmlStreamReader &reader, Map &m) { m.setTitle(reader.readElementText().toStdString()); }},
-        {ELEMENT_MD5SUM, [](QXmlStreamReader &reader, Map &m) { m.setMD5Sum(reader.readElementText().toStdString()); }},
-        {ELEMENT_SIZE, [](QXmlStreamReader &reader, Map &m) { m.setSize(reader.readElementText().toInt()); }},
-        {ELEMENT_DATE, [](QXmlStreamReader &reader, Map &m) { m.setDate(reader.readElementText().toStdString()); }},
-        {ELEMENT_DESCRIPTION, [](QXmlStreamReader &reader, Map &m) { m.setDescription(reader.readElementText().toStdString()); }},
-        {ELEMENT_ZIPBASEDIR, [](QXmlStreamReader &reader, Map &m) { m.setZipBaseDir(reader.readElementText().toStdString()); }},
-        {ELEMENT_COMMANDLINE, [](QXmlStreamReader &reader, Map &m) { m.setCommandLine(reader.readElementText().toStdString()); }},
-        {ELEMENT_STARTMAP, [](QXmlStreamReader &reader, Map &m) { m.setStartMap(reader.readElementText().toStdString()); }},
-        {ELEMENT_TAG, [](QXmlStreamReader &reader, Map &m) { m.addTag(reader.readElementText().toStdString()); }},
+        {ELEMENT_AUTHOR, [](QXmlStreamReader &reader, Map &map) { map.setAuthor(reader.readElementText().toStdString()); }},
+        {ELEMENT_TITLE, [](QXmlStreamReader &reader, Map &map) { map.setTitle(reader.readElementText().toStdString()); }},
+        {ELEMENT_MD5SUM, [](QXmlStreamReader &reader, Map &map) { map.setMD5Sum(reader.readElementText().toStdString()); }},
+        {ELEMENT_SIZE, [](QXmlStreamReader &reader, Map &map) { map.setSize(reader.readElementText().toInt()); }},
+        {ELEMENT_DATE, [](QXmlStreamReader &reader, Map &map) { map.setDate(reader.readElementText().toStdString()); }},
+        {ELEMENT_DESCRIPTION, [](QXmlStreamReader &reader, Map &map) { map.setDescription(reader.readElementText().toStdString()); }},
+        {ELEMENT_ZIPBASEDIR, [](QXmlStreamReader &reader, Map &map) { map.setZipBaseDir(reader.readElementText().toStdString()); }},
+        {ELEMENT_COMMANDLINE, [](QXmlStreamReader &reader, Map &map) { map.setCommandLine(reader.readElementText().toStdString()); }},
+        {ELEMENT_STARTMAP, [](QXmlStreamReader &reader, Map &map) { map.setStartMap(reader.readElementText().toStdString()); }},
+        {ELEMENT_TAG, [](QXmlStreamReader &reader, Map &map) { map.addTag(reader.readElementText().toStdString()); }},
     };
 
     const QString elementName = xml.name().toString();
-    auto it = elementHandlers.find(elementName);
-    if (it != elementHandlers.end()) {
-        it->second(xml, map);
+    auto iter = elementHandlers.find(elementName);
+    if (iter != elementHandlers.end()) {
+        iter->second(xml, map);
     } else if (elementName == QStringLiteral("tags")) {
         while (!(xml.isEndElement() && xml.name() == QStringLiteral("tags"))) {
             xml.readNext();

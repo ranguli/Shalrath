@@ -32,13 +32,13 @@ void LeftPane::setupUI() {
     table->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Set the table headers
-    QStringList headers = {"", "", "Filename", "Title", "Description", "Author", "Date Released", "User Ratings"};
+    const QStringList headers = {"", "", "Filename", "Title", "Description", "Author", "Date Released", "User Ratings"};
     table->setHorizontalHeaderLabels(headers);
 
     // Set icons for "Installed" and "Favorited" columns
-    QIcon downloadIcon = QIcon::fromTheme("document-save");
-    QIcon favoriteIcon = QIcon::fromTheme("emblem-favorite");
-    QIcon starIcon = QIcon::fromTheme("starred");
+    const QIcon downloadIcon = QIcon::fromTheme("document-save");
+    const QIcon favoriteIcon = QIcon::fromTheme("emblem-favorite");
+    const QIcon starIcon = QIcon::fromTheme("starred");
 
     // Hide the vertical header (row numbers)
     table->verticalHeader()->setVisible(false);
@@ -81,18 +81,19 @@ void LeftPane::setupUI() {
         table->setItem(row, 1, favoritedItem);
 
         // Exemption for smart pointers because of how Qt handles memory
-        //NOLINTBEGIN(cppcoreguidelines-owning-memory)
+        // NOLINTBEGIN(cppcoreguidelines-owning-memory)
         table->setItem(row, 2, new QTableWidgetItem("Filename"));
         table->setItem(row, 3, new QTableWidgetItem("Title"));
         table->setItem(row, 4, new QTableWidgetItem("Description"));
         table->setItem(row, 5, new QTableWidgetItem("Author"));
         table->setItem(row, 6, new QTableWidgetItem("Date Released"));
 
-
         // Add star icons and review text to "User Ratings" column
         auto *ratingWidget = new QWidget(this);
         auto *ratingLayout = new QHBoxLayout(ratingWidget);
         
+        // NOLINTEND(cppcoreguidelines-owning-memory)
+
         // NOLINTEND(cppcoreguidelines-owning-memory)
 
         ratingLayout->setContentsMargins(0, 0, 0, 0);

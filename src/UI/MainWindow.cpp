@@ -14,8 +14,8 @@
 #include "RightPane.h"
 #include "StatusBar.h"
 
-const int WINDOW_WIDTH = 1280;
-const int WINDOW_HEIGHT = 960;
+const int windowWidth = 1280;
+const int windowHeight = 960;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), networkManager(new NetworkManager(this)) {
     connect(this, &MainWindow::updateDatabaseRequested, networkManager, &NetworkManager::downloadMapDatabase);
@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), networkManager(ne
 
 void MainWindow::setupUI() {
     setWindowTitle("Hello World");
-    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    resize(windowWidth, windowHeight);
 
     // Make an exemption for not using smart pointers because of how Qt manages its own memory
     // NOLINTBEGIN(cppcoreguidelines-owning-memory)
@@ -38,8 +38,8 @@ void MainWindow::setupUI() {
 
     auto *splitter = new QSplitter(this);
 
-    auto leftPane = new LeftPane(this);
-    auto rightPane = new RightPane(this);
+    auto *leftPane = new LeftPane(this);
+    auto *rightPane = new RightPane(this);
 
     splitter->addWidget(leftPane);
     splitter->addWidget(rightPane);

@@ -12,13 +12,13 @@ class RightPane : public QFrame {
   public:
     RightPane(QWidget *parent = nullptr);
 
+  private:
+    void setupUI();
+
     QLabel *imageLabel;
     QTextBrowser *textBrowser;
     QPushButton *installButton;
     QPushButton *uninstallButton;
     QPushButton *playButton;
     QComboBox *episodeSelectButton;
-
-  private:
-    void setupUI();
 };
