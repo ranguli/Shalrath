@@ -13,7 +13,7 @@ WelcomeDialog::WelcomeDialog(QWidget *parent) : QDialog(parent), mainLayout(setu
 }
 
 void WelcomeDialog::setWindowProperties() {
-    setWindowTitle(tr("Welcome"));
+    setWindowTitle(tr("Shalrath"));
     // Set a minimum size to make the window taller
     const int minimumHeight = 220;
     setMinimumHeight(minimumHeight);
@@ -50,7 +50,7 @@ auto WelcomeDialog::setupHeaderLayout() -> QHBoxLayout * {
 
     // Center the text and add a newline after the first sentence
     // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-    auto *textLabel = new QLabel(tr("Welcome to Shalrath!\nWould you like to update the map database?"), this);
+    auto *textLabel = new QLabel(tr("Would you like to update the map database?"), this);
     textLabel->setAlignment(Qt::AlignCenter); // Center-align the text
 
     // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)

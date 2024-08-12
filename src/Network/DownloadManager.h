@@ -18,9 +18,11 @@ class DownloadManager : public QObject {
 
   signals:
     void downloadStarted();
-    void downloadFinished(const QString &result);
-    void mapDownloadFinished(const QString &result);
-    void thumbnailDownloadFinished(const QString &result);
+    void downloadFinished(const QString &result);           // For map database content
+    void mapDownloadFinished(const QByteArray &data);       // For maps
+    void thumbnailDownloadFinished(const QByteArray &data); // For thumbnails
+    void downloadStatusMessage(const QString &message);     // New signal for status messages
+    void downloadError(const QString &errorMessage);        // General error signal
 
   private slots:
     void onDownloadFinished(QNetworkReply *reply);

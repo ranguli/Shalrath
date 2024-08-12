@@ -17,12 +17,18 @@
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 960;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), downloadManager(new DownloadManager(this)) {
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent), downloadManager(new DownloadManager(this)), statusBar(new StatusBar(this)) {
+
+    // Connecting signals to slots
     connect(this, &MainWindow::updateDatabaseRequested, downloadManager, &DownloadManager::downloadMapDatabase);
     connect(downloadManager, &DownloadManager::downloadStarted, this, &MainWindow::handleMapDatabaseTaskStarted);
     connect(downloadManager, &DownloadManager::downloadFinished, this, &MainWindow::handleMapDatabaseResults);
     connect(downloadManager, &DownloadManager::mapDownloadFinished, this, &MainWindow::handleMapDownloadResults);
     connect(downloadManager, &DownloadManager::thumbnailDownloadFinished, this, &MainWindow::handleThumbnailDownloadResults);
+
+    // Make sure the signal-slot connection is made after statusBar is initialized
+    connect(downloadManager, &DownloadManager::downloadStatusMessage, statusBar, &StatusBar::displayMessage);
 
     setupUI();
 }
@@ -60,11 +66,9 @@ void MainWindow::setupUI() {
     // QMenu *viewMenu = menuBar->addMenu("View");
     // QMenu *helpMenu = menuBar->addMenu("Help");
 
-    statusBar = new StatusBar(this);
+    statusBar = new StatusBar(this); // Ensure statusBar is initialized
+    setStatusBar(statusBar);         // Assign the statusBar to the QMainWindow's status bar
     // NOLINTEND(cppcoreguidelines-owning-memory)
-    setStatusBar(statusBar);
-
-    connect(downloadManager, &DownloadManager::downloadFinished, statusBar, &StatusBar::displayMessage);
 }
 
 void MainWindow::initialize() {

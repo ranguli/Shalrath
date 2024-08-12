@@ -30,17 +30,22 @@ void DownloadManager::downloadThumbnail(const QString &url) {
 
 void DownloadManager::onDownloadFinished(QNetworkReply *reply) {
     if (reply->error() == QNetworkReply::NoError) {
-        QString result = QString::fromUtf8(reply->readAll());
-        if (reply->url().toString() == mapDatabaseUrl) {
-            emit downloadFinished("Map database updated");
-        } else if (reply->url().toString().endsWith(".zip")) { // Assuming maps are zip files
-            emit mapDownloadFinished("Map downloaded");
-        } else if (reply->url().toString().endsWith(".jpg") ||
-                   reply->url().toString().endsWith(".png")) { // Assuming thumbnails are jpg or png
-            emit thumbnailDownloadFinished("Thumbnail downloaded");
+        QByteArray data = reply->readAll();
+        QString url = reply->url().toString();
+
+        if (url == mapDatabaseUrl) {
+            QString result = QString::fromUtf8(data);
+            emit downloadFinished(result);                      // Emit the XML data as a string
+            emit downloadStatusMessage("Map database updated"); // Emit a simple status message
+        } else if (url.endsWith(".zip")) {                      // Assuming maps are zip files
+            emit mapDownloadFinished(data);                     // Emit raw data for map files
+            emit downloadStatusMessage("Map downloaded");
+        } else if (url.endsWith(".jpg") || url.endsWith(".png")) { // Assuming thumbnails are jpg or png
+            emit thumbnailDownloadFinished(data);                  // Emit raw data for thumbnails
+            emit downloadStatusMessage("Thumbnail downloaded");
         }
     } else {
-        emit downloadFinished("Could not update map database");
+        emit downloadError("Download failed: " + reply->errorString());
     }
     reply->deleteLater();
 }
