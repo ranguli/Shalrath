@@ -10,7 +10,6 @@ Shalrath::Shalrath(int &argc, char **argv) : QApplication(argc, argv) {
     initialize();
 }
 
-// Define the destructor
 Shalrath::~Shalrath() = default;
 
 void Shalrath::handleCommandLineOptions() {
@@ -30,7 +29,7 @@ void Shalrath::initialize() const {
         WelcomeDialog welcomeDialog;
 
         // Connect the dialog's signal to the initialization method
-        connect(&welcomeDialog, &WelcomeDialog::startInitialization, this, &Shalrath::initializeDatabase);
+        connect(&welcomeDialog, &WelcomeDialog::startInitialization, this, &Shalrath::initializeMapDatabase);
 
         // Connect progress updates to the WelcomeDialog's progress bar
         connect(this, &Shalrath::updateProgress, &welcomeDialog, &WelcomeDialog::setProgressBarPercentage);
@@ -51,12 +50,12 @@ void Shalrath::initialize() const {
     exec(); // Start the application event loop
 }
 
-void Shalrath::initializeDatabase() {
+void Shalrath::initializeMapDatabase() {
     // Until we implement the actual intialization we'll just mock it out.
     for (int i = 0; i <= 100; ++i) {
         QThread::msleep(50);
-        emit updateProgress(i);            // Update the progress bar
-        QCoreApplication::processEvents(); // Process events to update UI
+        emit updateProgress(i);
+        QCoreApplication::processEvents();
     }
 
     // After the progress bar is complete, close the dialog

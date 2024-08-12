@@ -13,10 +13,10 @@ class Shalrath : public QApplication { // NOLINT(cppcoreguidelines-special-membe
     void initialize() const;
 
   signals:
-    void updateProgress(int value); // Signal to update progress bar
+    void updateProgress(int value);
 
   private:
     static void handleCommandLineOptions();
     void showWelcomeDialogIfNeeded();
-    void initializeDatabase(); // Function to perform initialization and emit progress updates
+    void initializeMapDatabase();
 };

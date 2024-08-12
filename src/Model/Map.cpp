@@ -1,3 +1,6 @@
+#include <string>
+#include <vector>
+
 #include "Map.h"
 
 using std::string;
@@ -73,46 +76,46 @@ void Map::setNormalizedUsersRating(double newNormalizedUsersRating) {
     normalizedUsersRating = newNormalizedUsersRating;
 }
 
-void Map::setAuthor(const std::string &newAuthor) {
+void Map::setAuthor(const string &newAuthor) {
     author = newAuthor;
 }
 
-void Map::setTitle(const std::string &newTitle) {
+void Map::setTitle(const string &newTitle) {
     title = newTitle;
 }
 
-void Map::setMD5Sum(const std::string &newMD5Sum) {
+void Map::setMD5Sum(const string &newMD5Sum) {
     MD5Sum = newMD5Sum;
 }
 
-void Map::setSize(int new_size) {
-    size = new_size;
+void Map::setSize(int newSize) {
+    size = newSize;
 }
 
-void Map::setDate(const std::string &new_date) {
-    date = new_date;
+void Map::setDate(const string &newDate) {
+    date = newDate;
 }
 
-void Map::setDescription(const std::string &newDescription) {
+void Map::setDescription(const string &newDescription) {
     description = newDescription;
 }
 
-void Map::addTag(const std::string &tag) {
+void Map::addTag(const string &tag) {
     tags.push_back(tag);
 }
 
-void Map::setZipBaseDir(const std::string &newZipBaseDir) {
+void Map::setZipBaseDir(const string &newZipBaseDir) {
     zipBaseDir = newZipBaseDir;
 }
 
-void Map::setCommandLine(const std::string &newCommandLine) {
+void Map::setCommandLine(const string &newCommandLine) {
     commandLine = newCommandLine;
 }
 
-void Map::setStartMap(const std::string &newStartMap) {
+void Map::setStartMap(const string &newStartMap) {
     startMap = newStartMap;
 }
 
-void Map::setThumbnail(const std::vector<unsigned char> &newThumbnail) {
+void Map::setThumbnail(const vector<unsigned char> &newThumbnail) {
     thumbnail = newThumbnail;
 }
