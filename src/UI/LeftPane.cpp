@@ -67,6 +67,7 @@ void LeftPane::setupUI() {
     // Set fixed width for the "User Ratings" column to fit the content
     table->setColumnWidth(7, 200); // Adjust this value if necessary
 
+    
     // Populate the table with icons in "Installed" and "Favorited" columns
     for (int row = 0; row < table->rowCount(); ++row) {
         // Add download icon to "Installed" column
@@ -75,7 +76,7 @@ void LeftPane::setupUI() {
         table->setItem(row, 0, installedItem);
 
         // Add heart icon to "Favorited" column
-        auto *favoritedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
+        auto *favoritedItem = new QTableWidgetItem; //NOLINT(cppcoreguidelines-owning-memory)
         favoritedItem->setIcon(favoriteIcon);
         table->setItem(row, 1, favoritedItem);
 
@@ -90,6 +91,8 @@ void LeftPane::setupUI() {
         // Add star icons and review text to "User Ratings" column
         auto *ratingWidget = new QWidget(this);
         auto *ratingLayout = new QHBoxLayout(ratingWidget);
+        
+        // NOLINTEND(cppcoreguidelines-owning-memory)
 
         // NOLINTEND(cppcoreguidelines-owning-memory)
 
