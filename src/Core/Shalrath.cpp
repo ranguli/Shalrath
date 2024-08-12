@@ -33,7 +33,7 @@ void Shalrath::initialize() const {
         connect(&welcomeDialog, &WelcomeDialog::startInitialization, this, &Shalrath::initializeDatabase);
 
         // Connect progress updates to the WelcomeDialog's progress bar
-        connect(this, &Shalrath::updateProgress, &welcomeDialog, &WelcomeDialog::setProgress);
+        connect(this, &Shalrath::updateProgress, &welcomeDialog, &WelcomeDialog::setProgressBarPercentage);
 
         // Start the event loop with the dialog visible
         if (welcomeDialog.exec() == QDialog::Accepted) {

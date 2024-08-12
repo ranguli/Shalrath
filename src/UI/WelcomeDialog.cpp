@@ -2,79 +2,113 @@
 #include <QLabel>
 #include <QSpacerItem>
 #include <QStyle>
+#include <qprogressbar.h>
 // NOLINTEND
 
 #include "WelcomeDialog.h"
 
-WelcomeDialog::WelcomeDialog(QWidget *parent)
-    : QDialog(parent), mainLayout(new QVBoxLayout(this)), progressBar(new QProgressBar(this)) {
-    setWindowTitle(tr("Welcome"));
+WelcomeDialog::WelcomeDialog(QWidget *parent) : QDialog(parent), mainLayout(setupMainLayout()) {
+    setWindowProperties();
+    setLayout(mainLayout);
+}
 
-    // NOLINTBEGIN(cppcoreguidelines-owning-memory)
+void WelcomeDialog::setWindowProperties() {
+    setWindowTitle(tr("Welcome"));
+    // Set a minimum size to make the window taller
+    const int minimumHeight = 220;
+    setMinimumHeight(minimumHeight);
+}
+
+auto WelcomeDialog::setupMainLayout() -> QVBoxLayout * {
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    mainLayout = new QVBoxLayout(this);
+
+    auto headerLayout = setupHeaderLayout();
+    mainLayout->addLayout(headerLayout);
+
+    progressBar = setupProgressBar();
+    mainLayout->addWidget(progressBar);
+
+    // Add padding below the progress bar
+    const int progressBarPadding = 20;
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    auto *spacer = new QSpacerItem(0, progressBarPadding, QSizePolicy::Minimum, QSizePolicy::Fixed);
+    mainLayout->addItem(spacer);
+
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    auto buttonLayout = setupButtonLayout();
+
+    mainLayout->addLayout(buttonLayout);
+
+    return mainLayout;
+}
+
+auto WelcomeDialog::setupHeaderLayout() -> QHBoxLayout * {
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto *iconLabel = new QLabel(this);
     iconLabel->setPixmap(style()->standardPixmap(QStyle::SP_MessageBoxInformation));
 
     // Center the text and add a newline after the first sentence
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto *textLabel = new QLabel(tr("Welcome to Shalrath!\nWould you like to update the map database?"), this);
     textLabel->setAlignment(Qt::AlignCenter); // Center-align the text
-    // NOLINTEND(cppcoreguidelines-owning-memory)
 
-    auto *headerLayout = new QHBoxLayout(); // NOLINT(cppcoreguidelines-owning-memory)
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    auto *headerLayout = new QHBoxLayout();
     headerLayout->addWidget(iconLabel);
     headerLayout->addWidget(textLabel);
-    mainLayout->addLayout(headerLayout);
 
-    const int progressBarRange = 100;
-    progressBar->setRange(0, progressBarRange);
-    progressBar->setValue(0);
-    mainLayout->addWidget(progressBar);
+    return headerLayout;
+}
 
-    // Add padding below the progress bar
-    // NOLINTBEGIN(cppcoreguidelines-owning-memory)
-    const int progressBarPadding = 20;
-    auto *spacer = new QSpacerItem(0, progressBarPadding, QSizePolicy::Minimum, QSizePolicy::Fixed);
-    mainLayout->addItem(spacer);
-
-    // Resize buttons without moving them
+auto WelcomeDialog::setupButtonLayout() -> QHBoxLayout * {
     const int buttonWidth = 75;
     const int buttonHeight = 30;
     const QSize buttonSize(buttonWidth, buttonHeight);
 
-    // Set up the buttons
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto *buttonLayout = new QHBoxLayout();
 
     okButton = setupOkButton(buttonSize);
-
-    cancelButton = new QPushButton(tr("Cancel"), this);
-    // NOLINTEND(cppcoreguidelines-owning-memory)
-
-    cancelButton->setFixedSize(buttonSize);
+    cancelButton = setupCancelButton(buttonSize);
 
     buttonLayout->addStretch(); // Ensure buttons stay at their positions
     buttonLayout->addWidget(okButton);
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addStretch(); // Ensure buttons stay at their positions
-    mainLayout->addLayout(buttonLayout);
 
-    setLayout(mainLayout);
-
-    // Set a minimum size to make the window taller
-    const int minimumHeight = 220;
-    setMinimumHeight(minimumHeight);
-
-    // Connect the "Ok" button to the initialization signal
-
-    connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
+    return buttonLayout;
 }
 
-void WelcomeDialog::setProgress(int value) {
+auto WelcomeDialog::setupProgressBar() -> QProgressBar * {
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    progressBar = new QProgressBar(this);
+
+    const int progressBarRange = 100;
+    progressBar->setRange(0, progressBarRange);
+    progressBar->setValue(0);
+
+    return progressBar;
+}
+
+void WelcomeDialog::setProgressBarPercentage(int value) {
     progressBar->setValue(value);
 }
 
-QPushButton *WelcomeDialog::setupOkButton(QSize buttonSize) {
+auto WelcomeDialog::setupOkButton(QSize buttonSize) -> QPushButton * {
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     okButton = new QPushButton(tr("OK"), this);
     okButton->setFixedSize(buttonSize);
 
     connect(okButton, &QPushButton::clicked, this, &WelcomeDialog::startInitialization);
     return okButton;
+}
+
+auto WelcomeDialog::setupCancelButton(QSize buttonSize) -> QPushButton * {
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    cancelButton = new QPushButton(tr("Cancel"), this);
+    cancelButton->setFixedSize(buttonSize);
+
+    connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
+    return cancelButton;
 }
