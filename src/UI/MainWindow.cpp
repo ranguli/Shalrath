@@ -17,12 +17,12 @@
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 960;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), networkManager(new NetworkManager(this)) {
-    connect(this, &MainWindow::updateDatabaseRequested, networkManager, &NetworkManager::downloadMapDatabase);
-    connect(networkManager, &NetworkManager::downloadStarted, this, &MainWindow::handleMapDatabaseTaskStarted);
-    connect(networkManager, &NetworkManager::downloadFinished, this, &MainWindow::handleMapDatabaseResults);
-    connect(networkManager, &NetworkManager::mapDownloadFinished, this, &MainWindow::handleMapDownloadResults);
-    connect(networkManager, &NetworkManager::thumbnailDownloadFinished, this, &MainWindow::handleThumbnailDownloadResults);
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), downloadManager(new DownloadManager(this)) {
+    connect(this, &MainWindow::updateDatabaseRequested, downloadManager, &DownloadManager::downloadMapDatabase);
+    connect(downloadManager, &DownloadManager::downloadStarted, this, &MainWindow::handleMapDatabaseTaskStarted);
+    connect(downloadManager, &DownloadManager::downloadFinished, this, &MainWindow::handleMapDatabaseResults);
+    connect(downloadManager, &DownloadManager::mapDownloadFinished, this, &MainWindow::handleMapDownloadResults);
+    connect(downloadManager, &DownloadManager::thumbnailDownloadFinished, this, &MainWindow::handleThumbnailDownloadResults);
 
     setupUI();
 }
@@ -64,7 +64,7 @@ void MainWindow::setupUI() {
     // NOLINTEND(cppcoreguidelines-owning-memory)
     setStatusBar(statusBar);
 
-    connect(networkManager, &NetworkManager::downloadFinished, statusBar, &StatusBar::displayMessage);
+    connect(downloadManager, &DownloadManager::downloadFinished, statusBar, &StatusBar::displayMessage);
 }
 
 void MainWindow::initialize() {

@@ -7,11 +7,11 @@
 #include <QString>
 // NOLINTEND
 
-class NetworkManager : public QObject {
+class DownloadManager : public QObject {
     Q_OBJECT
 
   public:
-    explicit NetworkManager(QObject *parent = nullptr);
+    explicit DownloadManager(QObject *parent = nullptr);
     void downloadMapDatabase();
     void downloadMap(const QString &url);
     void downloadThumbnail(const QString &url);
@@ -26,6 +26,6 @@ class NetworkManager : public QObject {
     void onDownloadFinished(QNetworkReply *reply);
 
   private:
-    QNetworkAccessManager *networkManager;
+    QNetworkAccessManager *downloadManager;
     QString mapDatabaseUrl = "https://www.quaddicted.com/reviews/quaddicted_database.xml";
 };

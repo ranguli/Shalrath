@@ -1,10 +1,20 @@
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "Map.h"
 
 using std::string;
 using std::vector;
+
+// Constructor using initializer list
+Map::Map(string mapID, int type, double normalizedUsersRating, string author, string title, string MD5Sum, int size, string date,
+         string description, string zipBaseDir, string commandLine, string startMap, vector<unsigned char> thumbnail)
+    : mapID(std::move(mapID)), type(type), normalizedUsersRating(normalizedUsersRating), author(std::move(author)),
+      title(std::move(title)), MD5Sum(std::move(MD5Sum)), size(size), date(std::move(date)), description(std::move(description)),
+      zipBaseDir(std::move(zipBaseDir)), commandLine(std::move(commandLine)), startMap(std::move(startMap)),
+      thumbnail(std::move(thumbnail)) {
+}
 
 // Getters
 auto Map::getMapID() const -> string {

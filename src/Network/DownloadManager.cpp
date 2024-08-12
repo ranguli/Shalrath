@@ -1,4 +1,4 @@
-#include "NetworkManager.h"
+#include "DownloadManager.h"
 
 // NOLINTBEGIN
 #include <QNetworkReply>
@@ -6,29 +6,29 @@
 #include <QUrl>
 // NOLINTEND
 
-NetworkManager::NetworkManager(QObject *parent) : QObject(parent), networkManager(new QNetworkAccessManager(this)) {
-    connect(networkManager, &QNetworkAccessManager::finished, this, &NetworkManager::onDownloadFinished);
+DownloadManager::DownloadManager(QObject *parent) : QObject(parent), downloadManager(new QNetworkAccessManager(this)) {
+    connect(downloadManager, &QNetworkAccessManager::finished, this, &DownloadManager::onDownloadFinished);
 }
 
-void NetworkManager::downloadMapDatabase() {
+void DownloadManager::downloadMapDatabase() {
     emit downloadStarted();
     QNetworkRequest request{QUrl(mapDatabaseUrl)};
-    networkManager->get(request);
+    downloadManager->get(request);
 }
 
-void NetworkManager::downloadMap(const QString &url) {
+void DownloadManager::downloadMap(const QString &url) {
     emit downloadStarted();
     QNetworkRequest request{QUrl(url)};
-    networkManager->get(request);
+    downloadManager->get(request);
 }
 
-void NetworkManager::downloadThumbnail(const QString &url) {
+void DownloadManager::downloadThumbnail(const QString &url) {
     emit downloadStarted();
     QNetworkRequest request{QUrl(url)};
-    networkManager->get(request);
+    downloadManager->get(request);
 }
 
-void NetworkManager::onDownloadFinished(QNetworkReply *reply) {
+void DownloadManager::onDownloadFinished(QNetworkReply *reply) {
     if (reply->error() == QNetworkReply::NoError) {
         QString result = QString::fromUtf8(reply->readAll());
         if (reply->url().toString() == mapDatabaseUrl) {

@@ -6,11 +6,11 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt6 REQUIRED COMPONENTS Core Network)
 
 set(network_sources
-    NetworkManager.cpp
+    DownloadManager.cpp
 )
 
 set(network_headers
-    NetworkManager.h
+    DownloadManager.h
 )
 
 qt6_wrap_cpp(MOC_SOURCES ${network_headers})

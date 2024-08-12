@@ -2,16 +2,23 @@
 
 // NOLINTBEGIN
 #include <string>
+#include <utility>
 #include <vector>
 // NOLINTEND
 
+using std::move;
 using std::string;
 using std::vector;
 
 class Map {
   public:
+    Map()
+        : mapID(""), type(0), normalizedUsersRating(0.0), author(""), title(""), MD5Sum(""), size(0), date(""), description(""),
+          zipBaseDir(""), commandLine(""), startMap(""), thumbnail({}) {}
+
     // Constructors
-    Map() = default;
+    Map(string mapID, int type, double normalizedUsersRating, string author, string title, string MD5Sum, int size, string date,
+        string description, string zipBaseDir, string commandLine, string startMap, vector<unsigned char> thumbnail);
 
     // Getters
     [[nodiscard]] auto getMapID() const -> string;

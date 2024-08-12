@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 
-#include "NetworkManager.h"
+#include "DownloadManager.h"
 #include "StatusBar.h"
 
 class MainWindow : public QMainWindow { // NOLINT(cppcoreguidelines-special-member-functions)
@@ -26,7 +26,7 @@ class MainWindow : public QMainWindow { // NOLINT(cppcoreguidelines-special-memb
     void closeEvent(QCloseEvent *event) override;
 
   private:
-    NetworkManager *networkManager;
+    DownloadManager *downloadManager;
     StatusBar *statusBar;
 
     void setupUI();
