@@ -8,11 +8,15 @@ class Shalrath : public QApplication { // NOLINT(cppcoreguidelines-special-membe
 
   public:
     Shalrath(int &argc, char **argv);
-    ~Shalrath() override = default; // Ensure the destructor is defined
+    ~Shalrath() override;
 
-    void initialize();
+    void initialize() const;
+
+  signals:
+    void updateProgress(int value); // Signal to update progress bar
 
   private:
-    void handleCommandLineOptions();
+    static void handleCommandLineOptions();
     void showWelcomeDialogIfNeeded();
+    void initializeDatabase(); // Function to perform initialization and emit progress updates
 };
