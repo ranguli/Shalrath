@@ -6,7 +6,7 @@
 using std::exception;
 using std::string;
 
-class XMLParseException : public exception {
+class XMLParseException : public exception { // NOLINT(cppcoreguidelines-special-member-functions)
   public:
     explicit XMLParseException(const string &message) : msg_(message) {}
 

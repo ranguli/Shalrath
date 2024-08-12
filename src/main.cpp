@@ -1,28 +1,6 @@
-// NOLINTBEGIN
-#include <QApplication>
-#include <QSettings>
-// NOLINTEND
-
-#include "MainWindow.h"
-#include "WelcomeDialog.h"
+#include "Core/Shalrath.h"
 
 auto main(int argc, char *argv[]) -> int {
-    QApplication app(argc, argv);
-
-    // Use QSettings to check if the welcome dialog has been shown
-    QSettings settings("YourCompany", "YourAppName");
-    bool hasSeenWelcomeDialog = settings.value("hasSeenWelcomeDialog", false).toBool();
-
-    // Continue with the rest of your application
-    MainWindow mainWindow;
-    mainWindow.show();
-
-    if (!hasSeenWelcomeDialog) {
-        WelcomeDialog welcomeDialog;
-        if (welcomeDialog.exec() == QDialog::Accepted) {
-            settings.setValue("hasSeenWelcomeDialog", true);
-        }
-    }
-
-    return app.exec();
+    const Shalrath app(argc, argv);
+    return 0;
 }

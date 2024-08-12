@@ -19,7 +19,10 @@ void RightPane::setupUI() {
     setFrameShape(QFrame::Box); // Example frame shape
     setFrameShadow(QFrame::Raised);
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    // Make an exemption for not using smart pointers because of how Qt manages its own memory
+    // NOLINTBEGIN(cppcoreguidelines-owning-memory)
+
+    auto *layout = new QVBoxLayout(this);
 
     // Add an image placeholder at the top
     imageLabel = new QLabel(this);
@@ -51,6 +54,8 @@ void RightPane::setupUI() {
     auto *playButtons = new QHBoxLayout(this);
     playButton = new QPushButton("Play", this);
     episodeSelectButton = new QComboBox(this);
+
+    // NOLINTEND(cppcoreguidelines-owning-memory)
 
     playButtons->addWidget(playButton);
     playButtons->addWidget(episodeSelectButton);

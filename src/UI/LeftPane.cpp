@@ -11,6 +11,8 @@ LeftPane::LeftPane(QWidget *parent) : QWidget(parent) {
 }
 
 void LeftPane::setupUI() {
+    // Make an exemption for not using smart pointers because of how Qt manages its own memory
+    // NOLINTBEGIN(cppcoreguidelines-owning-memory)
     auto *layout = new QVBoxLayout(this);
 
     // Add a horizontal layout for the "Search" label and the line edit
@@ -19,6 +21,8 @@ void LeftPane::setupUI() {
     searchLineEdit = new QLineEdit(this);
     searchLayout->addWidget(searchLabel);
     searchLayout->addWidget(searchLineEdit);
+
+    // NOLINTEND(cppcoreguidelines-owning-memory)
 
     // Add the search layout to the main layout
     layout->addLayout(searchLayout);
@@ -63,6 +67,7 @@ void LeftPane::setupUI() {
     // Set fixed width for the "User Ratings" column to fit the content
     table->setColumnWidth(7, 200); // Adjust this value if necessary
 
+    
     // Populate the table with icons in "Installed" and "Favorited" columns
     for (int row = 0; row < table->rowCount(); ++row) {
         // Add download icon to "Installed" column
@@ -71,31 +76,33 @@ void LeftPane::setupUI() {
         table->setItem(row, 0, installedItem);
 
         // Add heart icon to "Favorited" column
-        auto *favoritedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
+        auto *favoritedItem = new QTableWidgetItem; //NOLINT(cppcoreguidelines-owning-memory)
         favoritedItem->setIcon(favoriteIcon);
         table->setItem(row, 1, favoritedItem);
 
-        // Add other items as examples
-        // NOLINTBEGIN(cppcoreguidelines-owning-memory)
+        // Exemption for smart pointers because of how Qt handles memory
+        //NOLINTBEGIN(cppcoreguidelines-owning-memory)
         table->setItem(row, 2, new QTableWidgetItem("Filename"));
         table->setItem(row, 3, new QTableWidgetItem("Title"));
         table->setItem(row, 4, new QTableWidgetItem("Description"));
         table->setItem(row, 5, new QTableWidgetItem("Author"));
         table->setItem(row, 6, new QTableWidgetItem("Date Released"));
-        // NOLINTEND(cppcoreguidelines-owning-memory)
+
 
         // Add star icons and review text to "User Ratings" column
         auto *ratingWidget = new QWidget(this);
         auto *ratingLayout = new QHBoxLayout(ratingWidget);
+        
+        // NOLINTEND(cppcoreguidelines-owning-memory)
 
         ratingLayout->setContentsMargins(0, 0, 0, 0);
         ratingLayout->setSpacing(2);
         for (int i = 0; i < 5; ++i) {
-            auto *starLabel = new QLabel(this);
+            auto *starLabel = new QLabel(this); // NOLINT(cppcoreguidelines-owning-memory)
             starLabel->setPixmap(starIcon.pixmap(16, 16));
             ratingLayout->addWidget(starLabel);
         }
-        auto *reviewLabel = new QLabel("(42 reviews)", this);
+        auto *reviewLabel = new QLabel("(42 reviews)", this); // NOLINT(cppcoreguidelines-owning-memory)
         ratingLayout->addWidget(reviewLabel);
         ratingWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         table->setCellWidget(row, 7, ratingWidget);
