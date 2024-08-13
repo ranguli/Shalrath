@@ -1,22 +1,31 @@
 #pragma once
 
 #include <QApplication>
-#include <QStringList>
+#include <QString>
+#include <memory>
 
-class Shalrath : public QApplication { // NOLINT(cppcoreguidelines-special-member-functions)
+class DownloadManager;
+
+class Shalrath : public QApplication {
     Q_OBJECT
 
   public:
     Shalrath(int &argc, char **argv);
     ~Shalrath() override;
 
-    void initialize() const;
-
   signals:
-    void updateProgress(int value);
+    void updateProgress(int percentage);
+
+  private slots:
+    void initializeMapDatabase();
+    void onMapDatabaseDownloaded(const QString &xmlData);
+    void onMapDownloaded();
+    void onThumbnailDownloaded(const QImage &image);
 
   private:
-    static void handleCommandLineOptions();
-    void showWelcomeDialogIfNeeded();
-    void initializeMapDatabase();
+    void handleCommandLineOptions();
+    void initialize() const;
+
+    std::unique_ptr<DownloadManager> downloadManager;
+    QString mapDatabaseXml;
 };

@@ -20,16 +20,6 @@ const int WINDOW_HEIGHT = 960;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), downloadManager(new DownloadManager(this)), statusBar(new StatusBar(this)) {
 
-    // Connecting signals to slots
-    connect(this, &MainWindow::updateDatabaseRequested, downloadManager, &DownloadManager::downloadMapDatabase);
-    connect(downloadManager, &DownloadManager::downloadStarted, this, &MainWindow::handleMapDatabaseTaskStarted);
-    connect(downloadManager, &DownloadManager::downloadFinished, this, &MainWindow::handleMapDatabaseResults);
-    connect(downloadManager, &DownloadManager::mapDownloadFinished, this, &MainWindow::handleMapDownloadResults);
-    connect(downloadManager, &DownloadManager::thumbnailDownloadFinished, this, &MainWindow::handleThumbnailDownloadResults);
-
-    // Make sure the signal-slot connection is made after statusBar is initialized
-    connect(downloadManager, &DownloadManager::downloadStatusMessage, statusBar, &StatusBar::displayMessage);
-
     setupUI();
 }
 
@@ -56,50 +46,9 @@ void MainWindow::setupUI() {
     auto *centralLayout = new QVBoxLayout(centralWidget);
     centralLayout->addWidget(splitter);
 
-    QMenuBar *menuBar = this->menuBar();
-    QMenu *fileMenu = menuBar->addMenu("File");
-    QAction *updateAction = fileMenu->addAction("Update Map Database...");
-    connect(updateAction, &QAction::triggered, this, &MainWindow::updateMapDatabase);
-
-    // Comment out unused variables to avoid warnings
-    // QMenu *editMenu = menuBar->addMenu("Edit");
-    // QMenu *viewMenu = menuBar->addMenu("View");
-    // QMenu *helpMenu = menuBar->addMenu("Help");
-
     statusBar = new StatusBar(this); // Ensure statusBar is initialized
     setStatusBar(statusBar);         // Assign the statusBar to the QMainWindow's status bar
     // NOLINTEND(cppcoreguidelines-owning-memory)
-}
-
-void MainWindow::initialize() {
-    // This probably should be implemented elsewhere outside of the UI code, but called here.
-
-    // 1. Download the map database in-memory
-    // 2. Parse it with the QuaddictedXMLParser
-    // 3. Update the database
-}
-
-void MainWindow::updateMapDatabase() {
-    emit updateDatabaseRequested();
-}
-
-void MainWindow::handleMapDatabaseTaskStarted() {
-    statusBar->displayMessage("Updating map database");
-}
-
-void MainWindow::handleMapDatabaseResults(const QString &result) {
-    Q_UNUSED(result); // Suppress unused parameter warning
-    statusBar->displayMessage("Map database updated");
-}
-
-void MainWindow::handleMapDownloadResults(const QString &result) {
-    Q_UNUSED(result); // Suppress unused parameter warning
-    statusBar->displayMessage("Map downloaded");
-}
-
-void MainWindow::handleThumbnailDownloadResults(const QString &result) {
-    Q_UNUSED(result); // Suppress unused parameter warning
-    statusBar->displayMessage("Thumbnail downloaded");
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {

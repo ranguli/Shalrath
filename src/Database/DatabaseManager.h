@@ -17,6 +17,8 @@ class DatabaseManager {
     QString getDatabasePath() const; // New method to determine the database path
 
     QSqlDatabase m_db;
+
+    void initializeDatabase();
 };
 
 #endif // DATABASEMANAGER_H

@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QStandardPaths>
 
 DatabaseManager::DatabaseManager() {
@@ -14,6 +15,8 @@ DatabaseManager::DatabaseManager() {
     } else {
         qDebug() << "Database connection established at" << dbPath;
     }
+
+    initializeDatabase();
 }
 
 DatabaseManager::~DatabaseManager() {
@@ -43,4 +46,33 @@ DatabaseManager &DatabaseManager::instance() {
 
 QSqlDatabase &DatabaseManager::database() {
     return m_db;
+}
+
+void DatabaseManager::initializeDatabase() {
+    QSqlQuery query(m_db);
+
+    // Create the "maps" table if it doesn't exist
+    query.prepare("CREATE TABLE IF NOT EXISTS maps ("
+                  "map_id TEXT PRIMARY KEY,"
+                  "type INTEGER,"
+                  "normalized_users_rating REAL,"
+                  "author TEXT,"
+                  "title TEXT,"
+                  "md5sum TEXT,"
+                  "size INTEGER,"
+                  "date TEXT,"
+                  "description TEXT,"
+                  "zipbasedir TEXT,"
+                  "commandline TEXT,"
+                  "startmap TEXT,"
+                  "thumbnail BLOB,"
+                  "favorited INTEGER,"
+                  "downloaded INTEGER"
+                  ")");
+
+    if (!query.exec()) {
+        qCritical() << "Error creating maps table:" << query.lastError().text();
+    } else {
+        qDebug() << "Maps table created or already exists.";
+    }
 }

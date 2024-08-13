@@ -1,13 +1,18 @@
-#include "MapDao.h"
+#include "MapDao.h" // Ensure this is the correct path to the MapDao header
+#include "Map.h"    // Ensure this is the correct path to the Map class header
+
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QVariant>
+
+// Your existing MapDao implementation
 
 MapDao::MapDao(QSqlDatabase &database) : m_db(database) {
+    // Initialization or any additional logic
 }
 
 void MapDao::bulkInsertMaps(const std::vector<Map> &maps) {
-    // Start a transaction
     m_db.transaction();
 
     QSqlQuery query(m_db);
@@ -29,21 +34,23 @@ void MapDao::bulkInsertMaps(const std::vector<Map> &maps) {
         query.bindValue(":zipbasedir", QString::fromStdString(map.getZipBaseDir()));
         query.bindValue(":commandline", QString::fromStdString(map.getCommandLine()));
         query.bindValue(":startmap", QString::fromStdString(map.getStartMap()));
-        query.bindValue(":thumbnail", QByteArray(reinterpret_cast<const char *>(map.getThumbnail().data()),
-                                                 static_cast<qsizetype>(map.getThumbnail().size())));
-        query.bindValue(":favorited", false);  // Assuming default values for new maps
-        query.bindValue(":downloaded", false); // Assuming default values for new maps
+
+        QByteArray thumbnailData(reinterpret_cast<const char *>(map.getThumbnail().data()),
+                                 static_cast<qsizetype>(map.getThumbnail().size()));
+        query.bindValue(":thumbnail", thumbnailData.isEmpty() ? QVariant(QMetaType(QMetaType::QByteArray)) : QVariant(thumbnailData));
+
+        query.bindValue(":favorited", false);  // Default value
+        query.bindValue(":downloaded", false); // Default value
 
         if (!query.exec()) {
             qCritical() << "Error inserting map" << map.getMapID().c_str() << ":" << query.lastError().text();
-            m_db.rollback(); // Rollback the transaction in case of an error
+            m_db.rollback();
             return;
         }
     }
 
-    // Commit the transaction
     if (!m_db.commit()) {
         qCritical() << "Error committing transaction:" << m_db.lastError().text();
-        m_db.rollback(); // Rollback if the commit fails
+        m_db.rollback();
     }
 }
