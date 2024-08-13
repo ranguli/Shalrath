@@ -14,7 +14,7 @@ class Map {
   public:
     Map()
         : mapID(""), type(0), normalizedUsersRating(0.0), author(""), title(""), MD5Sum(""), size(0), date(""), description(""),
-          zipBaseDir(""), commandLine(""), startMap(""), thumbnail({}) {}
+          zipBaseDir(""), commandLine(""), startMap(""), thumbnail({}), dependencies("") {}
 
     // Constructors
     Map(string mapID, int type, double normalizedUsersRating, string author, string title, string MD5Sum, int size, string date,
@@ -35,6 +35,7 @@ class Map {
     [[nodiscard]] auto getCommandLine() const -> string;
     [[nodiscard]] auto getStartMap() const -> string;
     [[nodiscard]] auto getThumbnail() const -> vector<unsigned char>;
+    [[nodiscard]] auto getDependencies() const -> string;
 
     // Setters
     void setMapID(const string &mapID);
@@ -51,6 +52,7 @@ class Map {
     void setCommandLine(const string &newCommandLine);
     void setStartMap(const string &newStartmap);
     void setThumbnail(const vector<unsigned char> &newThumbnail);
+    void setDependencies(const string &newDependencies);
 
   private:
     string mapID;
@@ -67,4 +69,5 @@ class Map {
     string commandLine;
     string startMap;
     vector<unsigned char> thumbnail;
+    string dependencies;
 };

@@ -18,4 +18,5 @@ class LeftPane : public QWidget {
     void setupUI();
     auto setupSearchLayout() -> QHBoxLayout *;
     auto setupTable() -> QTableWidget *;
+    void populateTableWithData();
 };

@@ -17,9 +17,9 @@ void MapDao::bulkInsertMaps(const std::vector<Map> &maps) {
 
     QSqlQuery query(m_db);
     query.prepare("INSERT INTO maps (map_id, type, normalized_users_rating, author, title, md5sum, size, date, "
-                  "description, zipbasedir, commandline, startmap, thumbnail, favorited, downloaded) "
+                  "description, zipbasedir, commandline, startmap, thumbnail, favorited, downloaded, dependencies) "
                   "VALUES (:map_id, :type, :normalized_users_rating, :author, :title, :md5sum, :size, :date, "
-                  ":description, :zipbasedir, :commandline, :startmap, :thumbnail, :favorited, :downloaded)");
+                  ":description, :zipbasedir, :commandline, :startmap, :thumbnail, :favorited, :downloaded, :dependencies)");
 
     for (const auto &map : maps) {
         query.bindValue(":map_id", QString::fromStdString(map.getMapID()));
@@ -39,6 +39,8 @@ void MapDao::bulkInsertMaps(const std::vector<Map> &maps) {
                                  static_cast<qsizetype>(map.getThumbnail().size()));
         query.bindValue(":thumbnail", thumbnailData.isEmpty() ? QVariant(QMetaType(QMetaType::QByteArray)) : QVariant(thumbnailData));
 
+        query.bindValue(":dependencies", QString::fromStdString(map.getDependencies()));
+
         query.bindValue(":favorited", false);  // Default value
         query.bindValue(":downloaded", false); // Default value
 
@@ -53,4 +55,44 @@ void MapDao::bulkInsertMaps(const std::vector<Map> &maps) {
         qCritical() << "Error committing transaction:" << m_db.lastError().text();
         m_db.rollback();
     }
+}
+
+std::vector<Map> MapDao::getAllMaps() {
+    std::vector<Map> maps;
+
+    QSqlQuery query(m_db);
+    query.prepare("SELECT map_id, type, normalized_users_rating, author, title, md5sum, size, date, "
+                  "description, zipbasedir, commandline, startmap, thumbnail, dependencies "
+                  "FROM maps");
+
+    if (query.exec()) {
+        while (query.next()) {
+            Map map;
+            map.setMapID(query.value("map_id").toString().toStdString());
+            map.setType(query.value("type").toInt());
+            map.setNormalizedUsersRating(query.value("normalized_users_rating").toDouble());
+            map.setAuthor(query.value("author").toString().toStdString());
+            map.setTitle(query.value("title").toString().toStdString());
+            map.setMD5Sum(query.value("md5sum").toString().toStdString());
+            map.setSize(query.value("size").toInt());
+            map.setDate(query.value("date").toString().toStdString());
+            map.setDescription(query.value("description").toString().toStdString());
+            map.setZipBaseDir(query.value("zipbasedir").toString().toStdString());
+            map.setCommandLine(query.value("commandline").toString().toStdString());
+            map.setStartMap(query.value("startmap").toString().toStdString());
+
+            // Fetch and store the thumbnail data
+            QByteArray byteArray = query.value("thumbnail").toByteArray();
+            std::vector<unsigned char> thumbnail(byteArray.begin(), byteArray.end());
+            map.setThumbnail(thumbnail);
+
+            map.setDependencies(query.value("dependencies").toString().toStdString());
+
+            maps.push_back(map);
+        }
+    } else {
+        qCritical() << "Error fetching maps:" << query.lastError().text();
+    }
+
+    return maps;
 }

@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <functional>
+#include <sstream>
 #include <unordered_map>
 // NOLINTEND
 
@@ -91,7 +92,27 @@ void QuaddictedXMLParser::parseFileElementChildren(QXmlStreamReader &xml, Map &m
                 elementHandlers.at(QStringLiteral("tag"))(xml, map);
             }
         }
+    } else if (elementName == QStringLiteral("requirements")) {
+        std::vector<std::string> dependencies;
+        while (!(xml.isEndElement() && xml.name() == QStringLiteral("requirements"))) {
+            xml.readNext();
+            if (xml.isStartElement() && xml.name() == QStringLiteral("file")) {
+                dependencies.push_back(xml.attributes().value(ELEMENT_ID).toString().toStdString());
+            }
+        }
+        map.setDependencies(join(dependencies, ","));
     } else {
         // Handle the case where the element name is not found
     }
+}
+
+std::string QuaddictedXMLParser::join(const std::vector<std::string> &elements, const std::string &separator) {
+    std::ostringstream os;
+    for (size_t i = 0; i < elements.size(); ++i) {
+        if (i != 0) {
+            os << separator;
+        }
+        os << elements[i];
+    }
+    return os.str();
 }

@@ -1,9 +1,12 @@
 #include "LeftPane.h"
 
+#include "DatabaseManager.h"
+#include "MapDao.h"
 #include <QHBoxLayout>
 #include <QHeaderView>
 #include <QIcon>
 #include <QLabel>
+#include <QSqlDatabase>
 #include <QVBoxLayout>
 
 LeftPane::LeftPane(QWidget *parent) : QWidget(parent) {
@@ -39,6 +42,63 @@ auto LeftPane::setupSearchLayout() -> QHBoxLayout * {
     searchLayout->addWidget(searchLineEdit);
 
     return searchLayout;
+}
+
+void LeftPane::populateTableWithData() {
+    // Get the database instance and create a MapDao
+    QSqlDatabase db = DatabaseManager::instance().database();
+    MapDao mapDao(db);
+
+    // Fetch all maps from the database
+    std::vector<Map> maps = mapDao.getAllMaps();
+
+    table->setRowCount(static_cast<int>(maps.size())); // Set the row count to the number of maps
+
+    // Populate the table with data from the maps
+    for (size_t row = 0; row < maps.size(); ++row) {
+        const Map &map = maps[row];
+
+        // Set installed and favorited icons as placeholders (or fetch actual status if available)
+        auto *installedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
+        installedItem->setIcon(QIcon::fromTheme("document-save"));
+        table->setItem(static_cast<int>(row), 0, installedItem);
+
+        auto *favoritedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
+        favoritedItem->setIcon(QIcon::fromTheme("emblem-favorite"));
+        table->setItem(static_cast<int>(row), 1, favoritedItem);
+
+        // Fill in the rest of the columns with actual data
+        table->setItem(static_cast<int>(row), 2, new QTableWidgetItem(QString::fromStdString(map.getMapID())));
+        table->setItem(static_cast<int>(row), 3, new QTableWidgetItem(QString::fromStdString(map.getTitle())));
+        table->setItem(static_cast<int>(row), 4, new QTableWidgetItem(QString::fromStdString(map.getDescription())));
+        table->setItem(static_cast<int>(row), 5, new QTableWidgetItem(QString::fromStdString(map.getAuthor())));
+        table->setItem(static_cast<int>(row), 6, new QTableWidgetItem(QString::fromStdString(map.getDate())));
+
+        // Add user ratings (adjust based on your actual rating system)
+        auto *ratingWidget = new QWidget(this);
+        auto *ratingLayout = new QHBoxLayout(ratingWidget);
+
+        ratingLayout->setContentsMargins(0, 0, 0, 0);
+        ratingLayout->setSpacing(2);
+        int userRating = static_cast<int>(map.getNormalizedUsersRating() / 2); // Assuming rating is out of 10, convert to 5 stars
+        QIcon starIcon = QIcon::fromTheme("starred");
+
+        for (int i = 0; i < 5; ++i) {
+            auto *starLabel = new QLabel(this); // NOLINT(cppcoreguidelines-owning-memory)
+            starLabel->setPixmap(starIcon.pixmap(16, 16));
+            if (i >= userRating) {
+                starLabel->setPixmap(QIcon::fromTheme("non-starred").pixmap(16, 16));
+            }
+            ratingLayout->addWidget(starLabel);
+        }
+
+        QString reviewText =
+            QString("(%1 reviews)").arg(map.getNormalizedUsersRating()); // Replace with actual review count if available
+        auto *reviewLabel = new QLabel(reviewText, this);                // NOLINT(cppcoreguidelines-owning-memory)
+        ratingLayout->addWidget(reviewLabel);
+        ratingWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        table->setCellWidget(static_cast<int>(row), 7, ratingWidget);
+    }
 }
 
 auto LeftPane::setupTable() -> QTableWidget * {
@@ -82,44 +142,7 @@ auto LeftPane::setupTable() -> QTableWidget * {
     // Set fixed width for the "User Ratings" column to fit the content
     table->setColumnWidth(7, 200); // Adjust this value if necessary
 
-    // Populate the table with icons in "Installed" and "Favorited" columns
-    for (int row = 0; row < table->rowCount(); ++row) {
-        // Add download icon to "Installed" column
-        auto *installedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
-        installedItem->setIcon(downloadIcon);
-        table->setItem(row, 0, installedItem);
-
-        // Add heart icon to "Favorited" column
-        auto *favoritedItem = new QTableWidgetItem; // NOLINT(cppcoreguidelines-owning-memory)
-        favoritedItem->setIcon(favoriteIcon);
-        table->setItem(row, 1, favoritedItem);
-
-        // Exemption for smart pointers because of how Qt handles memory
-        // NOLINTBEGIN(cppcoreguidelines-owning-memory)
-        table->setItem(row, 2, new QTableWidgetItem("Filename"));
-        table->setItem(row, 3, new QTableWidgetItem("Title"));
-        table->setItem(row, 4, new QTableWidgetItem("Description"));
-        table->setItem(row, 5, new QTableWidgetItem("Author"));
-        table->setItem(row, 6, new QTableWidgetItem("Date Released"));
-
-        // Add star icons and review text to "User Ratings" column
-        auto *ratingWidget = new QWidget(this);
-        auto *ratingLayout = new QHBoxLayout(ratingWidget);
-
-        // NOLINTEND(cppcoreguidelines-owning-memory)
-
-        ratingLayout->setContentsMargins(0, 0, 0, 0);
-        ratingLayout->setSpacing(2);
-        for (int i = 0; i < 5; ++i) {
-            auto *starLabel = new QLabel(this); // NOLINT(cppcoreguidelines-owning-memory)
-            starLabel->setPixmap(starIcon.pixmap(16, 16));
-            ratingLayout->addWidget(starLabel);
-        }
-        auto *reviewLabel = new QLabel("(42 reviews)", this); // NOLINT(cppcoreguidelines-owning-memory)
-        ratingLayout->addWidget(reviewLabel);
-        ratingWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        table->setCellWidget(row, 7, ratingWidget);
-    }
+    populateTableWithData();
 
     return table;
 }

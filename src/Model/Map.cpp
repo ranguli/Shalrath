@@ -13,7 +13,7 @@ Map::Map(string mapID, int type, double normalizedUsersRating, string author, st
     : mapID(std::move(mapID)), type(type), normalizedUsersRating(normalizedUsersRating), author(std::move(author)),
       title(std::move(title)), MD5Sum(std::move(MD5Sum)), size(size), date(std::move(date)), description(std::move(description)),
       zipBaseDir(std::move(zipBaseDir)), commandLine(std::move(commandLine)), startMap(std::move(startMap)),
-      thumbnail(std::move(thumbnail)) {
+      thumbnail(std::move(thumbnail)), dependencies("") {
 }
 
 // Getters
@@ -73,6 +73,10 @@ auto Map::getThumbnail() const -> vector<unsigned char> {
     return thumbnail;
 }
 
+auto Map::getDependencies() const -> string {
+    return dependencies;
+}
+
 // Setters
 void Map::setMapID(const string &newMapID) {
     mapID = newMapID;
@@ -128,4 +132,8 @@ void Map::setStartMap(const string &newStartMap) {
 
 void Map::setThumbnail(const vector<unsigned char> &newThumbnail) {
     thumbnail = newThumbnail;
+}
+
+void Map::setDependencies(const string &newDependencies) {
+    dependencies = newDependencies;
 }

@@ -67,7 +67,8 @@ void DatabaseManager::initializeDatabase() {
                   "startmap TEXT,"
                   "thumbnail BLOB,"
                   "favorited INTEGER,"
-                  "downloaded INTEGER"
+                  "downloaded INTEGER,"
+                  "dependencies TEXT"
                   ")");
 
     if (!query.exec()) {

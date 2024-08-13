@@ -69,7 +69,7 @@ void Shalrath::onMapDatabaseDownloaded(const QString &xmlData) {
     // Convert QList<Map> to std::vector<Map> for bulkInsertMaps
     std::vector<Map> mapVector;
     for (const Map &map : maps) {
-        qDebug() << QString::fromStdString(map.getMapID());
+        // qDebug() << QString::fromStdString(map.getMapID());
         mapVector.push_back(map);
     }
 
