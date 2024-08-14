@@ -17,7 +17,7 @@ class WelcomeDialog : public QDialog { // NOLINT(cppcoreguidelines-special-membe
     explicit WelcomeDialog(QWidget *parent = nullptr);
     ~WelcomeDialog() override = default;
 
-    void setProgress(int value); // Method to update the progress bar
+    void setProgressBarPercentage(int value); // Method to update the progress bar
 
   signals:
     void startInitialization(); // Signal to start initialization
@@ -28,5 +28,13 @@ class WelcomeDialog : public QDialog { // NOLINT(cppcoreguidelines-special-membe
     QPushButton *okButton;
     QPushButton *cancelButton;
 
-    QPushButton *setupOkButton(QSize buttonSize);
+    auto setupOkButton(QSize buttonSize) -> QPushButton *;
+    auto setupCancelButton(QSize buttonSize) -> QPushButton *;
+
+    auto setupButtonLayout() -> QHBoxLayout *;
+    auto setupProgressBar() -> QProgressBar *;
+    auto setupHeaderLayout() -> QHBoxLayout *;
+    auto setupMainLayout() -> QVBoxLayout *;
+
+    void setWindowProperties();
 };

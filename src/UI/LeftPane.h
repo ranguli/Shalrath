@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QTableWidget>
 #include <QWidget>
@@ -15,4 +16,7 @@ class LeftPane : public QWidget {
 
   private:
     void setupUI();
+    auto setupSearchLayout() -> QHBoxLayout *;
+    auto setupTable() -> QTableWidget *;
+    void populateTableWithData();
 };

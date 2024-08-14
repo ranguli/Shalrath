@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 
-#include "NetworkManager.h"
+#include "DownloadManager.h"
 #include "StatusBar.h"
 
 class MainWindow : public QMainWindow { // NOLINT(cppcoreguidelines-special-member-functions)
@@ -12,21 +12,11 @@ class MainWindow : public QMainWindow { // NOLINT(cppcoreguidelines-special-memb
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override = default;
 
-  signals:
-    void updateDatabaseRequested();
-
-  private slots:
-    void updateMapDatabase();
-    void handleMapDatabaseTaskStarted();
-    void handleMapDatabaseResults(const QString &result);
-    void handleMapDownloadResults(const QString &result);
-    void handleThumbnailDownloadResults(const QString &result);
-
   protected:
     void closeEvent(QCloseEvent *event) override;
 
   private:
-    NetworkManager *networkManager;
+    DownloadManager *downloadManager;
     StatusBar *statusBar;
 
     void setupUI();

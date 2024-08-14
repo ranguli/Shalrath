@@ -2,16 +2,23 @@
 
 // NOLINTBEGIN
 #include <string>
+#include <utility>
 #include <vector>
 // NOLINTEND
 
+using std::move;
 using std::string;
 using std::vector;
 
 class Map {
   public:
+    Map()
+        : mapID(""), type(0), normalizedUsersRating(0.0), author(""), title(""), MD5Sum(""), size(0), date(""), description(""),
+          zipBaseDir(""), commandLine(""), startMap(""), thumbnail({}), dependencies("") {}
+
     // Constructors
-    Map() = default;
+    Map(string mapID, int type, double normalizedUsersRating, string author, string title, string MD5Sum, int size, string date,
+        string description, string zipBaseDir, string commandLine, string startMap, vector<unsigned char> thumbnail);
 
     // Getters
     [[nodiscard]] auto getMapID() const -> string;
@@ -28,22 +35,24 @@ class Map {
     [[nodiscard]] auto getCommandLine() const -> string;
     [[nodiscard]] auto getStartMap() const -> string;
     [[nodiscard]] auto getThumbnail() const -> vector<unsigned char>;
+    [[nodiscard]] auto getDependencies() const -> string;
 
     // Setters
-    void setMapID(const string &new_map_id);
+    void setMapID(const string &mapID);
     void setType(int new_type);
-    void setNormalizedUsersRating(double new_normalized_users_rating);
-    void setAuthor(const string &new_author);
-    void setTitle(const string &new_title);
-    void setMD5Sum(const string &new_md5sum);
-    void setSize(int new_size);
-    void setDate(const string &new_date);
-    void setDescription(const string &new_description);
+    void setNormalizedUsersRating(double newNormalizedUsersRating);
+    void setAuthor(const string &newAuthor);
+    void setTitle(const string &newTitle);
+    void setMD5Sum(const string &newMD5Sum);
+    void setSize(int newSize);
+    void setDate(const string &newDate);
+    void setDescription(const string &newDescription);
     void addTag(const std::string &tag);
-    void setZipBaseDir(const string &new_zipbasedir);
-    void setCommandLine(const string &new_commandline);
-    void setStartMap(const string &new_startmap);
-    void setThumbnail(const vector<unsigned char> &new_thumbnail);
+    void setZipBaseDir(const string &newZipBaseDir);
+    void setCommandLine(const string &newCommandLine);
+    void setStartMap(const string &newStartmap);
+    void setThumbnail(const vector<unsigned char> &newThumbnail);
+    void setDependencies(const string &newDependencies);
 
   private:
     string mapID;
@@ -60,4 +69,5 @@ class Map {
     string commandLine;
     string startMap;
     vector<unsigned char> thumbnail;
+    string dependencies;
 };

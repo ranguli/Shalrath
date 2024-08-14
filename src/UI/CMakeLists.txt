@@ -27,4 +27,4 @@ set(ui_headers
 add_library(ui_lib ${ui_sources} ${ui_headers})
 
 target_include_directories(ui_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(ui_lib Qt6::Core Qt6::Gui Qt6::Widgets network_lib)
+target_link_libraries(ui_lib database_lib network_lib Qt6::Core Qt6::Gui Qt6::Widgets)

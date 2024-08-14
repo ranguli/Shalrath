@@ -15,4 +15,5 @@ class QuaddictedXMLParser {
   private:
     static void parseFileElementAttributes(QXmlStreamReader &xml, Map &map);
     static void parseFileElementChildren(QXmlStreamReader &xml, Map &map);
+    static std::string join(const std::vector<std::string> &elements, const std::string &separator);
 };
