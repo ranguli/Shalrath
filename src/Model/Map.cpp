@@ -8,12 +8,13 @@ using std::string;
 using std::vector;
 
 // Constructor using initializer list
-Map::Map(string mapID, int type, double normalizedUsersRating, string author, string title, string MD5Sum, int size, string date,
-         string description, string zipBaseDir, string commandLine, string startMap, vector<unsigned char> thumbnail)
-    : mapID(std::move(mapID)), type(type), normalizedUsersRating(normalizedUsersRating), author(std::move(author)),
-      title(std::move(title)), MD5Sum(std::move(MD5Sum)), size(size), date(std::move(date)), description(std::move(description)),
-      zipBaseDir(std::move(zipBaseDir)), commandLine(std::move(commandLine)), startMap(std::move(startMap)),
-      thumbnail(std::move(thumbnail)), dependencies("") {
+Map::Map(string _mapID, int _type, double _normalizedUsersRating, string _author, string _title, string _MD5Sum, int _size,
+         string _date, string _description, string _zipBaseDir, string _commandLine, string _startMap,
+         vector<unsigned char> _thumbnail)
+    : mapID(std::move(_mapID)), type(_type), normalizedUsersRating(_normalizedUsersRating), author(std::move(_author)),
+      title(std::move(_title)), MD5Sum(std::move(_MD5Sum)), size(_size), date(std::move(_date)), description(std::move(_description)),
+      zipBaseDir(std::move(_zipBaseDir)), commandLine(std::move(_commandLine)), startMap(std::move(_startMap)),
+      thumbnail(std::move(_thumbnail)), dependencies("") {
 }
 
 // Getters
